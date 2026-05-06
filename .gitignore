@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*~
+__pycache__/
+.venv/
+
+# Build artefacts. We commit the two handout PDFs; the live-deck PDFs are
+# regenerated locally with `typst compile agentic-coding-seminar-{research,brookes}.typ`.
+agentic-coding-seminar-research.pdf
+agentic-coding-seminar-brookes.pdf
