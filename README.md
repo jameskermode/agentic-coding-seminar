@@ -21,6 +21,10 @@ The views and experiences in these slides are those of the author personally, in
 
 The talks are reportorial: they describe what worked and what didn't on a specific set of scientific computing projects using a specific set of tools (primarily Claude Code, with reference to Cursor, Codex, and Gemini CLI). The patterns and anti-patterns are tool-agnostic; the cost figures and case studies are illustrative of one researcher's experience, not benchmarks or recommendations.
 
+## How these slides were made
+
+Claude Code (Anthropic) helped produce these slides: drafting Typst layout, analysing GitHub commit history into the bar charts, and catching overflow / formatting issues across both audience variants. I take full responsibility for the content, claims, and recommendations — every figure was verified, every cited statistic chased to source, every fact-claim about my own work double-checked against the underlying repositories. The patterns I recommend in the deck (spec first; red/green TDD; manage context; hoard known-working examples) are the patterns I used to make the deck itself. Commits with substantive AI contribution carry a `Co-Authored-By: Claude` trailer in `git log` — the partial audit trail recommended on the *Responsible Use* slide.
+
 ## Build
 
 The decks are written in [Typst](https://typst.app/). Tested on `typst 0.14.2`.
