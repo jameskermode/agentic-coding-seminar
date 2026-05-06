@@ -291,7 +291,7 @@ while not done:
         #bullet[*No actions* – model cannot run code, read files, or browse the web – only text in, text out]
       ]
       #v(0.2em)
-      #note[#text(size: 13pt)[ChatGPT, Claude, Gemini etc. all basially work like this.]]
+      #note[#text(size: 13pt)[ChatGPT, Claude, Gemini etc. all basically work like this.]]
     ]
   )
 ]
@@ -1091,7 +1091,7 @@ while not done:
             *2. Bridging expertise gaps*
             #v(0.2em)
             #text(size: 16pt)[
-              For research that spans discipllines,
+              For research that spans disciplines,
               agentic coding provides working fluency across domains:
               implementing a sparse GP one day, debugging a LAMMPS Kokkos GPU interface the next.
             ]
