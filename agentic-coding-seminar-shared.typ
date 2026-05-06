@@ -1940,7 +1940,7 @@ while not done:
         #link("https://github.com/jameskermode/agentic-coding-seminar")[github.com/jameskermode/agentic-coding-seminar]
       ]
       #v(0.15em)
-      #text(size: 12pt, style: "italic", fill: rgb("#666"))[Released under CC-BY-4.0. Scan QR or follow the link.]
+      #text(size: 12pt, style: "italic", fill: rgb("#666"))[Released under CC-BY-4.0 · slides themselves produced with Claude Code (see README).]
     ],
   )
 ]
