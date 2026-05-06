@@ -9,6 +9,8 @@ Slides from two delivered seminars by [James Kermode](https://warwick.ac.uk/jrke
 
 The two decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study.
 
+Discussion: [LinkedIn post](https://www.linkedin.com/posts/james-kermode-b97147284_effective-agentic-coding-for-scientific-computing-activity-7457797781534011392-N-d9).
+
 ## Abstract
 
 Agentic coding tools such as Claude Code, Cursor, and Codex have crossed from novelty into the daily workflows of research groups willing to engage them seriously. Used well, they can migrate legacy Fortran build systems, write numerically validated simulation code, and maintain CI across multi-language stacks; used badly, they hallucinate plausible nonsense at scale.
