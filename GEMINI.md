@@ -1,13 +1,13 @@
 # GEMINI.md - Agentic Coding Seminar Project
 
-This project contains the source files for two seminars on "Effective Agentic Coding for Scientific Computing" delivered by James Kermode. The decks are written in [Typst](https://typst.app/) and share a common source.
+This project contains the source files for three seminars on "Effective Agentic Coding for Scientific Computing" delivered by James Kermode. The decks are written in [Typst](https://typst.app/) and share a common source.
 
 ## Project Overview
 
-- **Main Goal:** Deliver presentation slides and handouts for two seminar versions: "Research" (Warwick) and "Brookes" (Oxford Brookes).
+- **Main Goal:** Deliver presentation slides and handouts for three seminar versions: "Research" (Warwick), "Brookes" (Oxford Brookes), and "MPIP" (Max Planck Institute for Polymer Research — a trimmed ~45 min cut of the Research deck).
 - **Core Stack:** Typst (for documents), Python (for data analysis/figures), `uv` (for Python management).
 - **Architecture:** 
-    - `agentic-coding-seminar-shared.typ`: The single source of truth for both decks.
+    - `agentic-coding-seminar-shared.typ`: The single source of truth for all three decks.
     - Shim files (e.g., `agentic-coding-seminar-research.typ`) import the shared deck and configure it.
     - `github_claude_stats.py`: Analyzes Claude-authored commits across multiple repos to produce charts in the `figures/` directory.
 
@@ -24,6 +24,10 @@ typst compile agentic-coding-seminar-research-handout.typ
 # Brookes version (Presentation / Handout)
 typst compile agentic-coding-seminar-brookes.typ
 typst compile agentic-coding-seminar-brookes-handout.typ
+
+# MPIP version (Presentation / Handout)
+typst compile agentic-coding-seminar-mpip.typ
+typst compile agentic-coding-seminar-mpip-handout.typ
 ```
 
 ### Statistics and Figures (Python)
@@ -44,7 +48,7 @@ uv run github_claude_stats.py
 ## Development Conventions
 
 - **Shared Source:** Always modify `agentic-coding-seminar-shared.typ` for content changes unless they are specific to a single version shim.
-- **Version Shims:** Use the `version` variable within the shared source to toggle version-specific content (e.g., `#if version == "brookes" [...]`).
+- **Version Shims:** Use the `version` variable (`"research"`, `"brookes"`, `"mpip"`) within the shared source to toggle version-specific content (e.g., `#if version == "brookes" [...]`). Each conditional's `else` branch is the research content, so `mpip` inherits the research deck; it overrides only via `else if version == "mpip"` and is trimmed by gating slides with `#if version != "mpip"`.
 - **Phased Slides:** Use `phased-slide` and `phase(k, step, content)` for progressive reveals in the presentation.
 - **Figure Regeneration:** If repo statistics change, run `github_claude_stats.py` to update the figures. Ensure `gh` is logged in (`gh auth login`).
 - **Commits:** Follow the "Co-Authored-By: Claude" convention for substantive AI contributions.

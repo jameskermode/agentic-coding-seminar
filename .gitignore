@@ -4,7 +4,8 @@
 __pycache__/
 .venv/
 
-# Build artefacts. We commit the two handout PDFs; the live-deck PDFs are
-# regenerated locally with `typst compile agentic-coding-seminar-{research,brookes}.typ`.
+# Build artefacts. We commit the three handout PDFs; the live-deck PDFs are
+# regenerated locally with `typst compile agentic-coding-seminar-{research,brookes,mpip}.typ`.
 agentic-coding-seminar-research.pdf
 agentic-coding-seminar-brookes.pdf
+agentic-coding-seminar-mpip.pdf

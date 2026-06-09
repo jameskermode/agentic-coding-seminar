@@ -1,13 +1,14 @@
 # Effective Agentic Coding for Scientific Computing
 
-Slides from two delivered seminars by [James Kermode](https://warwick.ac.uk/jrkermode), University of Warwick. Both versions share a single Typst source.
+Slides from three delivered seminars by [James Kermode](https://warwick.ac.uk/jrkermode), University of Warwick. All three versions share a single Typst source.
 
 | Talk | Audience | Date | Handout |
 |------|----------|------|---------|
 | **Research version** | Predictive Modelling Discussion Group + HetSys CDT, University of Warwick | 30 April 2026 | [📄 PDF](agentic-coding-seminar-research-handout.pdf) |
 | **Brookes version** | Oxford Brookes · AI & Data Analysis Network | 6 May 2026 | [📄 PDF](agentic-coding-seminar-brookes-handout.pdf) |
+| **MPIP version** | Max Planck Institute for Polymer Research | 15 June 2026 | [📄 PDF](agentic-coding-seminar-mpip-handout.pdf) |
 
-The two decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study.
+The three decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study. The MPIP version is a trimmed (~45 min) cut of the research version for a computational-science audience: it drops the `mograder` case study and a few detail slides.
 
 Discussion: [LinkedIn post](https://www.linkedin.com/posts/james-kermode-b97147284_effective-agentic-coding-for-scientific-computing-activity-7457797781534011392-N-d9).
 
@@ -25,7 +26,7 @@ The talks are reportorial: they describe what worked and what didn't on a specif
 
 ## How these slides were made
 
-Claude Code (Anthropic) helped produce these slides: drafting Typst layout, analysing GitHub commit history into the bar charts, and catching overflow / formatting issues across both audience variants. I take full responsibility for the content, claims, and recommendations — every figure was verified, every cited statistic chased to source, every fact-claim about my own work double-checked against the underlying repositories. The patterns I recommend in the deck (spec first; red/green TDD; manage context; hoard known-working examples) are the patterns I used to make the deck itself. Commits with substantive AI contribution carry a `Co-Authored-By: Claude` trailer in `git log` — the partial audit trail recommended on the *Responsible Use* slide.
+Claude Code (Anthropic) helped produce these slides: drafting Typst layout, analysing GitHub commit history into the bar charts, and catching overflow / formatting issues across the audience variants. I take full responsibility for the content, claims, and recommendations — every figure was verified, every cited statistic chased to source, every fact-claim about my own work double-checked against the underlying repositories. The patterns I recommend in the deck (spec first; red/green TDD; manage context; hoard known-working examples) are the patterns I used to make the deck itself. Commits with substantive AI contribution carry a `Co-Authored-By: Claude` trailer in `git log` — the partial audit trail recommended on the *Responsible Use* slide.
 
 ## Build
 
@@ -39,21 +40,28 @@ typst compile agentic-coding-seminar-research-handout.typ  # one page per logica
 # Brookes version
 typst compile agentic-coding-seminar-brookes.typ           # full live deck (phase reveals)
 typst compile agentic-coding-seminar-brookes-handout.typ   # one page per logical slide
+
+# MPIP version (trimmed ~45 min cut of the research deck)
+typst compile agentic-coding-seminar-mpip.typ              # full live deck (phase reveals)
+typst compile agentic-coding-seminar-mpip-handout.typ      # one page per logical slide
 ```
 
-All four shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and invoke it with the appropriate `version` and `handout` arguments.
+All six shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and invoke it with the appropriate `version` and `handout` arguments.
 
 ## Repository contents
 
 ```
 .
-├── agentic-coding-seminar-shared.typ                # single source of truth (both decks)
+├── agentic-coding-seminar-shared.typ                # single source of truth (all three decks)
 ├── agentic-coding-seminar-research.typ              # shim → #deck("research")
 ├── agentic-coding-seminar-research-handout.typ      # shim → #deck("research", handout: true)
 ├── agentic-coding-seminar-research-handout.pdf      # prebuilt research handout
 ├── agentic-coding-seminar-brookes.typ               # shim → #deck("brookes")
 ├── agentic-coding-seminar-brookes-handout.typ       # shim → #deck("brookes", handout: true)
 ├── agentic-coding-seminar-brookes-handout.pdf       # prebuilt Brookes handout
+├── agentic-coding-seminar-mpip.typ                  # shim → #deck("mpip")
+├── agentic-coding-seminar-mpip-handout.typ          # shim → #deck("mpip", handout: true)
+├── agentic-coding-seminar-mpip-handout.pdf          # prebuilt MPIP handout
 ├── figures/
 │   ├── heatmap.png                                  # GitHub contribution heatmap
 │   ├── transition.png                               # weekly commit transition chart

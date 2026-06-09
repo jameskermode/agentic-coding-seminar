@@ -2,20 +2,29 @@
 // Effective Agentic Coding for Scientific Computing
 // James Kermode · School of Engineering, University of Warwick
 //
-// Two delivered talks share this source:
+// Three delivered talks share this source:
 //   research:  Predictive Modelling Discussion Group + HetSys CDT, Warwick (30 Apr 2026)
 //   brookes:   Oxford Brookes · AI & Data Analysis Network        (6 May 2026)
+//   mpip:      Max Planck Institute for Polymer Research          (15 Jun 2026)
 //
 // Build (each shim is one line — `#import` + `#deck(...)`):
 //   typst compile agentic-coding-seminar-research.typ
 //   typst compile agentic-coding-seminar-research-handout.typ
 //   typst compile agentic-coding-seminar-brookes.typ
 //   typst compile agentic-coding-seminar-brookes-handout.typ
+//   typst compile agentic-coding-seminar-mpip.typ
+//   typst compile agentic-coding-seminar-mpip-handout.typ
 //
 // `version` (string) is checked at slides that diverge between audiences:
 // title, thesis (brookes-only), the case-study region (mograder-first vs.
 // research-first), anti-pattern 2 examples, outlook bullets, lecturer/student
 // guide, responsible-use, and the closing discussion question.
+//
+// `mpip` inherits the research deck verbatim by falling through every
+// `else` branch (it is close to the research audience). It diverges only at
+// the title, responsible-use, and discussion slides, and is trimmed to ~45
+// min: four research slides are wrapped in `#if version != "mpip"` (the
+// heatmap, Commit Analysis, Atomistica, and the mograder case study).
 //
 // `handout: true` collapses every `phased-slide` to its final phase only,
 // producing a shareable post-talk PDF without the build-up pages. Reveals are
@@ -164,6 +173,14 @@
     "If students can use AI to write code, what are we really assessing?",
     "James Kermode · School of Engineering, University of Warwick",
     "6 May 2026 · Oxford Brookes · AI & Data Analysis Network",
+    disclaimer: warwick-disclaimer,
+  )
+] else if version == "mpip" [
+  #titleslide(
+    "Effective Agentic Coding\nfor Scientific Computing",
+    "Patterns, pitfalls, and a live case study",
+    "James Kermode · School of Engineering, University of Warwick",
+    "15 June 2026 · Max Planck Institute for Polymer Research",
     disclaimer: warwick-disclaimer,
   )
 ] else [
@@ -695,13 +712,13 @@ while not done:
 
   // ── Heatmap (phase 1 only for Brookes) ─────────────────────
   #slide(title: "Can you spot when I started using Claude?")[
-    #text(size: 13pt)[*GitHub contribution heatmap* (jameskermode · Apr 2025 – Apr 2026)]
+    #text(size: 13pt)[*GitHub contribution heatmap* (jameskermode · Jun 2025 – Jun 2026)]
     #v(-0.2em)
     #align(center, image("figures/heatmap.png", width: 96%))
   ]
 
-  // ── 1k commits data (single slide for Brookes) ─────────────
-  #slide(title: "1k Claude co-authored commits · 246k lines of code")[
+  // ── 1.2k commits data (single slide for Brookes) ─────────────
+  #slide(title: "1.2k Claude co-authored commits · 286k lines of code")[
     #text(size: 13pt)[
     #grid(columns: (1.15fr, 0.85fr), gutter: 1.2em,
       [
@@ -725,22 +742,22 @@ while not done:
             )
           )
         )
-        #tickbar("commits",    accent,         (0, 90, 180, 270, 360))
-        #tickbar("kLOC added", rgb("#FF8F00"), (0, 20, 40, 60, 80))
+        #tickbar("commits",    accent,         (0, 100, 200, 300, 400))
+        #tickbar("kLOC added", rgb("#FF8F00"), (0, 25, 50, 75, 100))
         #v(0.2em)
         #let entries = (
-          ("mograder",               "CI · bugs · features",  351,  77.4),
-          ("HetSys/PX914",           "bugs · features · CI",  205,  74.0),
+          ("mograder",               "CI · bugs · features",  366,  78.6),
+          ("HetSys/PX914",           "bugs · features · CI",  247,  81.0),
           ("SciML demos",            "CI · features · bugs",   88,  30.1),
           ("HetSys/isg2026-amentum", "features",               87,   9.8),
+          ("libAtoms/extxyz",        "CI · bugs",              74,   7.1),
           ("ACEpotentials.jl",       "features · bugs · CI",   59,  12.1),
-          ("QUIP",                   "CI · bugs (96%)",        45,   2.6),
+          ("QUIP",                   "CI · bugs (94%)",        47,   2.7),
           ("f90wrap",                "CI · bugs · tests",      42,   1.7),
           ("mograder-tauri",         "bugs · CI · other",      28,   1.8),
+          ("marimo-precompute",      "even mix",               26,   3.0),
           ("audio-player",           "features",               18,   6.0),
           ("matscipy",               "CI · bugs",              18,   0.6),
-          ("marimo-precompute",      "even mix",               16,   2.2),
-          ("LACT",                   "bugs · features",        10,   1.4),
         )
         #grid(
           columns: (12.5em, 1fr), row-gutter: 7pt, column-gutter: 0.4em, align: horizon,
@@ -750,12 +767,12 @@ while not done:
               text(size: 8pt, style: "italic", fill: rgb("#666"), k2),
             ),
             stack(dir: ttb, spacing: 1.5pt,
-              block(height: 0.4em, width: (100% * c / 360), fill: accent),
-              block(height: 0.4em, width: (100% * l / 80), fill: rgb("#FF8F00")),
+              block(height: 0.4em, width: (100% * c / 400), fill: accent),
+              block(height: 0.4em, width: (100% * l / 100), fill: rgb("#FF8F00")),
             ),
           )).flatten()
         )
-        #text(size: 8pt, style: "italic")[26 repos · `git log --numstat` · simulation data excluded · Mar 2025–Apr 2026]
+        #text(size: 8pt, style: "italic")[36 repos · `git log --numstat` · simulation data excluded · Mar 2025–Jun 2026]
       ],
       [
         *By contribution type*
@@ -765,21 +782,21 @@ while not done:
           text(size: 12pt, label), text(size: 12pt, str(n)),
           block(height: 0.75em, width: (100% * n / total), fill: col)
         )
-        #cat("CI/CD & build",  252, 260, rgb("#E57373"))
-        #cat("Bug fixes",      214, 260, rgb("#FFB74D"))
-        #cat("New features",   211, 260, accent)
-        #cat("Other",          133, 260, rgb("#B0BEC5"))
-        #cat("Documentation",   60, 260, rgb("#81C784"))
-        #cat("Demo / viz",      55, 260, rgb("#9575CD"))
-        #cat("Tests",           38, 260, rgb("#4DB6AC"))
-        #cat("Refactor",        30, 260, rgb("#90A4AE"))
-        #cat("API compat",      17, 260, rgb("#A1887F"))
+        #cat("CI/CD & build",  320, 330, rgb("#E57373"))
+        #cat("Bug fixes",      247, 330, rgb("#FFB74D"))
+        #cat("New features",   242, 330, accent)
+        #cat("Other",          169, 330, rgb("#B0BEC5"))
+        #cat("Demo / viz",      73, 330, rgb("#9575CD"))
+        #cat("Documentation",   66, 330, rgb("#81C784"))
+        #cat("Tests",           40, 330, rgb("#4DB6AC"))
+        #cat("Refactor",        38, 330, rgb("#90A4AE"))
+        #cat("API compat",      23, 330, rgb("#A1887F"))
         #v(0.2em)
         #warn-block[
-          #text(size: 11pt)[*25% is CI/CD + build infrastructure* – the unglamorous maintenance work that would otherwise never get done.]
+          #text(size: 11pt)[*26% is CI/CD + build infrastructure* – the unglamorous maintenance work that would otherwise never get done.]
         ]
         #v(0.2em)
-        #text(size: 12pt, style: "italic")[*Cost log*: \~£400 over 6 months on Claude Max 5× (\~\$2,480 at metered rates). Specialist knowledge made this hard to delegate – counterfactual is "not done", not "done by someone else".]
+        #text(size: 12pt, style: "italic")[*Cost log*: \~£500 over 8 months on Claude Max 5× (\~\$2,500 at metered rates). Specialist knowledge made this hard to delegate – counterfactual is "not done", not "done by someone else".]
       ]
     )
     ]
@@ -827,23 +844,25 @@ while not done:
   // ── Research-version case-study section ────────────────────
   #sectionslide("Research codebases — some worked examples", subtitle: "ACEpotentials.jl · LAMMPS interface · GPU port · Atomistica")
 
-  // ── Heatmap (2 phases) ─────────────────────────────────────
+  // ── Heatmap (2 phases) — cut from MPIP for time ────────────
+  #if version != "mpip" [
   #phased-slide(title: "Can you spot when I started using Claude?", phases: 2, k => {
     phase(k, 1)[
-      #text(size: 13pt)[*GitHub contribution heatmap* (jameskermode · Apr 2025 – Apr 2026)]
+      #text(size: 13pt)[*GitHub contribution heatmap* (jameskermode · Jun 2025 – Jun 2026)]
       #v(-0.2em)
       #align(center, image("figures/heatmap.png", width: 96%))
     ]
     v(-0.3em)
     phase(k, 2)[
-      #text(size: 13pt)[*Weekly commits across 26 repos: Claude co-authored vs other*]
+      #text(size: 13pt)[*Weekly commits across 36 repos: Claude co-authored vs other*]
       #v(-0.2em)
       #align(center, image("figures/transition.png", width: 96%))
     ]
   })
+  ]
 
-  // ── 1k commits (3 phases) ──────────────────────────────────
-  #phased-slide(title: "1k Claude co-authored commits · 246k lines of code", phases: 3, k => {
+  // ── 1.2k commits (3 phases) ──────────────────────────────────
+  #phased-slide(title: "1.2k Claude co-authored commits · 286k lines of code", phases: 3, k => {
     text(size: 13pt)[
     #grid(columns: (1.15fr, 0.85fr), gutter: 1.2em,
       phase(k, 1)[
@@ -867,22 +886,22 @@ while not done:
             )
           )
         )
-        #tickbar("commits",    accent,         (0, 90, 180, 270, 360))
-        #tickbar("kLOC added", rgb("#FF8F00"), (0, 20, 40, 60, 80))
+        #tickbar("commits",    accent,         (0, 100, 200, 300, 400))
+        #tickbar("kLOC added", rgb("#FF8F00"), (0, 25, 50, 75, 100))
         #v(0.2em)
         #let entries = (
-          ("mograder",               "CI · bugs · features",  351,  77.4),
-          ("HetSys/PX914",           "bugs · features · CI",  205,  74.0),
+          ("mograder",               "CI · bugs · features",  366,  78.6),
+          ("HetSys/PX914",           "bugs · features · CI",  247,  81.0),
           ("SciML demos",            "CI · features · bugs",   88,  30.1),
           ("HetSys/isg2026-amentum", "features",               87,   9.8),
+          ("libAtoms/extxyz",        "CI · bugs",              74,   7.1),
           ("ACEpotentials.jl",       "features · bugs · CI",   59,  12.1),
-          ("QUIP",                   "CI · bugs (96%)",        45,   2.6),
+          ("QUIP",                   "CI · bugs (94%)",        47,   2.7),
           ("f90wrap",                "CI · bugs · tests",      42,   1.7),
           ("mograder-tauri",         "bugs · CI · other",      28,   1.8),
+          ("marimo-precompute",      "even mix",               26,   3.0),
           ("audio-player",           "features",               18,   6.0),
           ("matscipy",               "CI · bugs",              18,   0.6),
-          ("marimo-precompute",      "even mix",               16,   2.2),
-          ("LACT",                   "bugs · features",        10,   1.4),
         )
         #grid(
           columns: (12.5em, 1fr), row-gutter: 7pt, column-gutter: 0.4em, align: horizon,
@@ -892,12 +911,12 @@ while not done:
               text(size: 8pt, style: "italic", fill: rgb("#666"), k2),
             ),
             stack(dir: ttb, spacing: 1.5pt,
-              block(height: 0.4em, width: (100% * c / 360), fill: accent),
-              block(height: 0.4em, width: (100% * l / 80), fill: rgb("#FF8F00")),
+              block(height: 0.4em, width: (100% * c / 400), fill: accent),
+              block(height: 0.4em, width: (100% * l / 100), fill: rgb("#FF8F00")),
             ),
           )).flatten()
         )
-        #text(size: 8pt, style: "italic")[26 repos · `git log --numstat` · simulation data excluded · Mar 2025–Apr 2026]
+        #text(size: 8pt, style: "italic")[36 repos · `git log --numstat` · simulation data excluded · Mar 2025–Jun 2026]
       ],
       [
         #phase(k, 2)[
@@ -908,39 +927,40 @@ while not done:
             text(size: 12pt, label), text(size: 12pt, str(n)),
             block(height: 0.75em, width: (100% * n / total), fill: col)
           )
-          #cat("CI/CD & build",  252, 260, rgb("#E57373"))
-          #cat("Bug fixes",      214, 260, rgb("#FFB74D"))
-          #cat("New features",   211, 260, accent)
-          #cat("Other",          133, 260, rgb("#B0BEC5"))
-          #cat("Documentation",   60, 260, rgb("#81C784"))
-          #cat("Demo / viz",      55, 260, rgb("#9575CD"))
-          #cat("Tests",           38, 260, rgb("#4DB6AC"))
-          #cat("Refactor",        30, 260, rgb("#90A4AE"))
-          #cat("API compat",      17, 260, rgb("#A1887F"))
+          #cat("CI/CD & build",  320, 330, rgb("#E57373"))
+          #cat("Bug fixes",      247, 330, rgb("#FFB74D"))
+          #cat("New features",   242, 330, accent)
+          #cat("Other",          169, 330, rgb("#B0BEC5"))
+          #cat("Demo / viz",      73, 330, rgb("#9575CD"))
+          #cat("Documentation",   66, 330, rgb("#81C784"))
+          #cat("Tests",           40, 330, rgb("#4DB6AC"))
+          #cat("Refactor",        38, 330, rgb("#90A4AE"))
+          #cat("API compat",      23, 330, rgb("#A1887F"))
           #v(0.2em)
           #warn-block[
-            #text(size: 11pt)[*25% is CI/CD + build infrastructure* – the unglamorous maintenance work that would otherwise never get done.]
+            #text(size: 11pt)[*26% is CI/CD + build infrastructure* – the unglamorous maintenance work that would otherwise never get done.]
           ]
         ]
         #v(0.2em)
         #phase(k, 3)[
-          #text(size: 12pt, style: "italic")[*Cost log*: \~£400 over 6 months on Claude Max 5× (\~\$2,480 at metered rates). Specialist knowledge made this hard to delegate – counterfactual is "not done", not "done by someone else".]
+          #text(size: 12pt, style: "italic")[*Cost log*: \~£500 over 8 months on Claude Max 5× (\~\$2,500 at metered rates). Specialist knowledge made this hard to delegate – counterfactual is "not done", not "done by someone else".]
         ]
       ]
     )
     ]
   })
 
-  // ── Commit Analysis ────────────────────────────────────────
+  // ── Commit Analysis — cut from MPIP for time ───────────────
+  #if version != "mpip" [
   #phased-slide(title: "Commit Analysis", phases: 2, k => {
     twocol(
       phase(k, 1)[
         *Main activity types:*
         #v(0.2em)
         #text(size: 15pt)[
-          #bullet[*Maintaining codebases*: CI/CD, bug fixes, API compat = 47% of commits – work that accumulates as debt otherwise]
-          #bullet[*New features*: 211 commits – new ETACE backend in ACEpotentials.jl, Amentum HetSys ISG setup, mograder + tauri wrapper]
-          #bullet[*Bridging expertise gaps*: QUIP's 45 commits almost entirely CI/build in a Fortran/Python/Meson stack; f90wrap and matscipy similar]
+          #bullet[*Maintaining codebases*: CI/CD, bug fixes, API compat = 48% of commits – work that accumulates as debt otherwise]
+          #bullet[*New features*: 242 commits – new ETACE backend in ACEpotentials.jl, Amentum HetSys ISG setup, mograder + tauri wrapper]
+          #bullet[*Bridging expertise gaps*: QUIP's 47 commits almost entirely CI/build in a Fortran/Python/Meson stack; f90wrap and matscipy similar]
         ]
       ],
       phase(k, 2)[
@@ -960,6 +980,7 @@ while not done:
       ]
     )
   })
+  ]
 
   // ── ACEpotentials LAMMPS interface ─────────────────────────
   #phased-slide(title: "ACEpotentials.jl – LAMMPS interface", phases: 4, k => {
@@ -1031,7 +1052,8 @@ while not done:
     ]
   })
 
-  // ── Atomistica (research, second-order effect) ─────────────
+  // ── Atomistica (research, second-order effect) — cut from MPIP for time ──
+  #if version != "mpip" [
   #phased-slide(title: "Second-order effects: Atomistica", phases: 4, k => {
     phase(k, 1)[
       #text(size: 16pt)[
@@ -1067,6 +1089,7 @@ while not done:
       #note[Six weeks between "fix our build system" and "rewrite 15 years of Fortran in modern C++" – the willingness to attempt ambitious transformations spreads.]
     ]
   })
+  ]
 
   // ── Three ways (research framing) ──────────────────────────
   #phased-slide(title: "Three ways Agentic Coding accelerates research", phases: 4, k => {
@@ -1128,7 +1151,8 @@ while not done:
     )
   })
 
-  // ── Mograder section break (research: supporting role) ─────
+  // ── Mograder case study (research: supporting role) — cut from MPIP for time ──
+  #if version != "mpip" [
   #sectionslide("A larger case study – mograder", subtitle: "AI-assisted tools for AI-assisted learning")
 
   // ── Mograder compressed intro ──────────────────────────────
@@ -1217,6 +1241,7 @@ while not done:
       The decisions that define what the software is for cannot be delegated.
         ]
     ]
+  ]
   ]
 ]
 
@@ -1645,11 +1670,12 @@ while not done:
   // (overlaps with the lecturer guide later) and the AI-literacy bullet
   // (already in the closing summary).
   #let bullets = (
-    [*The substitution ratio.* \~6 months of infrastructure work for \~£400 of Claude Max subscription vs \~£30–60k of postdoc-equivalent labour. Close to two orders of magnitude.],
+    [*The substitution ratio.* \~8 months of infrastructure work for \~£500 of Claude Max subscription vs \~£30–60k of postdoc-equivalent labour. Close to two orders of magnitude.],
     [*"Substitution" isn't quite the right frame.* Most of this work needed specialist domain knowledge that couldn't be cleanly delegated. Most would simply not have been done – closer to "new capability" than "redirected costs".],
     [*New grant line item:* "AI tooling" alongside compute costs, with consequences for how RSE/PDRA costs are justified and how their day-to-day roles develop.],
     [*Where do early-careers learn?* Unglamorous CI / build / maintenance and small new features was always how junior researchers built expertise. If agents do it, the training pipeline needs reworking (who will supervise the agents?)],
     [*Domain expertise is the bottleneck.* Leverage shifts to people who know the field, and what is possible. ],
+    [*The macro version of this slide:* Anthropic's own "sustained acceleration" scenario imagines 100-person teams doing 10,000-person work (Favaro & Clark, May 2026) – the substitution ratio at lab scale. *Vendor framing, treat as directional.*],
     [*None of these have settled answers.* We are running an uncontrolled experiment in real time!]
   )
   #phased-slide(title: "Outlook – implications for research and teaching", phases: bullets.len(), k => {
@@ -1662,11 +1688,12 @@ while not done:
   // Outlook bullets list (research). The unannounced "Warwick trial" bullet
   // that exists in the live talk has been removed for the public version.
   #let bullets = (
-    [*The substitution ratio.* I've done \~6 months of infrastructure work for ~£400 of Claude Max subscription (≈ \$2500 at per-token API rates) vs ~£30–60k of postdoc-equivalent labour. Close to two orders of magnitude.],
+    [*The substitution ratio.* I've done \~8 months of infrastructure work for ~£500 of Claude Max subscription (≈ \$2500 at per-token API rates) vs ~£30–60k of postdoc-equivalent labour. Close to two orders of magnitude.],
     [*"Substitution" isn't quite the right frame.* Most of this work required specialist domain knowledge that couldn't be cleanly delegated. Most of it would simply not have been done – closer to "new capability" than "redirected costs".],
     [*Plausible new grant line item:* "AI tooling" alongside HPC compute costs, with consequences for how RSE/PDRA costs are justified and how their day-to-day roles develop.],
     [*Where do early-careers learn?* Unglamorous CI / build / maintenance and small new features was always how junior researchers built tacit expertise. If agents do it, the training pipeline needs reworking – not least so the next generation can supervise the agents at all.],
     [*Domain expertise is the bottleneck.* Leverage shifts toward people who already know the field, and know what should be possible – with knock-on effects for PhD supervision, PDRA career structures, and the value of institutional knowledge.],
+    [*The macro version of this slide:* Anthropic's own "sustained acceleration" scenario imagines 100-person teams doing 10,000-person work (Favaro & Clark, May 2026) – the substitution ratio at lab scale. *Vendor framing, treat as directional.*],
     [*None of these have settled answers.* We are running an uncontrolled experiment in real time!]
   )
   #phased-slide(title: "Outlook – funding & training implications", phases: bullets.len(), k => {
@@ -1807,8 +1834,12 @@ while not done:
         #bullet[Reproducibility is even more important in the AI age: pinned dependencies, fixed random seeds, good tests. `git log` with Claude trailers is a partial audit trail, I suggest keeping it.]
         #bullet[Never paste confidential material into standard LLMs without agreement of co-authors/collaborators, because of the risk of data leakage: unpublished manuscripts, industry-partner data, proposals or papers you are reviewing. UKRI specifically prohibits AI in proposal review; most publishers prohibit it for manuscript review.]
         #bullet[Agree conventions with your supervisor/collaborators early.]
-        #bullet[At Warwick, advised to use MS Copilot for university information as there's a data security agreement in place. If you are not using university information, you may use other AI assistants, provided you have the correct licence to access them.]
-        #note[#text(size: 14pt)["If you want to generate generic computer code that does not contain any university information, you may use any AI assistant, provided you have the correct license to do so." #link("https://warwick.ac.uk/services/ris/research-integrity/airesearch/")[warwick.ac.uk/services/ris/research-integrity/airesearch]]]
+        #if version == "mpip" [
+          #bullet[Check your institution's and funders' AI policies — most now have one. Keep confidential or unpublished data out of assistants that lack an appropriate data-protection agreement.]
+        ] else [
+          #bullet[At Warwick, advised to use MS Copilot for university information as there's a data security agreement in place. If you are not using university information, you may use other AI assistants, provided you have the correct licence to access them.]
+          #note[#text(size: 14pt)["If you want to generate generic computer code that does not contain any university information, you may use any AI assistant, provided you have the correct license to do so." #link("https://warwick.ac.uk/services/ris/research-integrity/airesearch/")[warwick.ac.uk/services/ris/research-integrity/airesearch]]]
+        ]
     ]
   ]
 ]
@@ -1884,6 +1915,21 @@ while not done:
       ]
     ]
   ]
+] else if version == "mpip" [
+  #slide(title: "Discussion")[
+    #v(1em)
+    #block(fill: light, radius: 6pt, inset: 1.4em, width: 100%)[
+      #text(size: 21pt, weight: "bold")[
+        In your own work — a QM/MD simulation, an ML model, an analysis of
+        experimental data — where would you trust an agent's output without
+        verification, and where would you never?
+      ]
+      #v(0.8em)
+      #text(size: 18pt, style: "italic", fill: rgb("#444444"))[
+        What is the difference between those two cases?
+      ]
+    ]
+  ]
 ] else [
   #slide(title: "Discussion")[
     #v(1em)
@@ -1907,25 +1953,27 @@ while not done:
     [
       *Guides & writing*
       #v(0.2em)
-      #text(size: 13pt)[
+      #text(size: 12pt)[
         #bullet[*Simon Willison* – Agentic Engineering Patterns (Feb 2026+)
-          #linebreak()#text(size: 11pt, fill: accent)[#link("https://simonwillison.net/guides/agentic-engineering-patterns/")[simonwillison.net/guides/agentic-engineering-patterns/]]]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://simonwillison.net/guides/agentic-engineering-patterns/")[simonwillison.net/guides/agentic-engineering-patterns/]]]
         #bullet[*Patrick Mineault* – Claude Code for Scientists (Jan 2026)
-          #linebreak()#text(size: 11pt, fill: accent)[#link("https://neuroai.science/p/claude-code-for-scientists")[neuroai.science/p/claude-code-for-scientists]]]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://neuroai.science/p/claude-code-for-scientists")[neuroai.science/p/claude-code-for-scientists]]]
         #bullet[*MIT Missing Semester* – Agentic Coding (2026)
-          #linebreak()#text(size: 11pt, fill: accent)[#link("https://missing.csail.mit.edu/2026/agentic-coding/")[missing.csail.mit.edu/2026/agentic-coding/]]]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://missing.csail.mit.edu/2026/agentic-coding/")[missing.csail.mit.edu/2026/agentic-coding/]]]
+        #bullet[*Favaro & Clark* – When AI builds itself (May 2026) #text(size: 9pt, style: "italic", fill: rgb("#666"))[· vendor view, directional]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://www.anthropic.com/institute/recursive-self-improvement")[anthropic.com/institute/recursive-self-improvement]]]
         #bullet[*mograder* – the case study
-          #linebreak()#text(size: 11pt, fill: accent)[#link("https://jameskermode.github.io/mograder/")[jameskermode.github.io/mograder/]]]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://jameskermode.github.io/mograder/")[jameskermode.github.io/mograder/]]]
       ]
     ],
     [
       *Claude Code plugins*
       #v(0.2em)
-      #text(size: 13pt)[
+      #text(size: 12pt)[
         #bullet[*obra/superpowers* – skills framework & methodology
-          #linebreak()#text(size: 11pt, fill: accent)[#link("https://github.com/obra/superpowers")[github.com/obra/superpowers]]]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://github.com/obra/superpowers")[github.com/obra/superpowers]]]
         #bullet[*marimo-team/marimo-pair* – agents inside a marimo notebook
-          #linebreak()#text(size: 11pt, fill: accent)[#link("https://github.com/marimo-team/marimo-pair")[github.com/marimo-team/marimo-pair]]]
+          #linebreak()#text(size: 10pt, fill: accent)[#link("https://github.com/marimo-team/marimo-pair")[github.com/marimo-team/marimo-pair]]]
       ]
     ],
   )
