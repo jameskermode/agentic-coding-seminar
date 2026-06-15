@@ -845,7 +845,6 @@ while not done:
   #sectionslide("Research codebases — some worked examples", subtitle: "ACEpotentials.jl · LAMMPS interface · GPU port · Atomistica")
 
   // ── Heatmap (2 phases) — cut from MPIP for time ────────────
-  #if version != "mpip" [
   #phased-slide(title: "Can you spot when I started using Claude?", phases: 2, k => {
     phase(k, 1)[
       #text(size: 13pt)[*GitHub contribution heatmap* (jameskermode · Jun 2025 – Jun 2026)]
@@ -859,7 +858,6 @@ while not done:
       #align(center, image("figures/transition.png", width: 96%))
     ]
   })
-  ]
 
   // ── 1.2k commits (3 phases) ──────────────────────────────────
   #phased-slide(title: "1.2k Claude co-authored commits · 286k lines of code", phases: 3, k => {
@@ -1394,7 +1392,7 @@ while not done:
 })
 
 // ── Section break — Demo ─────────────────────────────────────
-#sectionslide("Demo – Claude Code live", subtitle: "Example but somewhat realistic teaching tool")
+#sectionslide("Demo – Claude Code live", subtitle: "Example but somewhat realistic test case")
 
 // ── Demo 1: prompt ───────────────────────────────────────────
 #if version == "brookes" [
@@ -1693,7 +1691,8 @@ while not done:
     [*Plausible new grant line item:* "AI tooling" alongside HPC compute costs, with consequences for how RSE/PDRA costs are justified and how their day-to-day roles develop.],
     [*Where do early-careers learn?* Unglamorous CI / build / maintenance and small new features was always how junior researchers built tacit expertise. If agents do it, the training pipeline needs reworking – not least so the next generation can supervise the agents at all.],
     [*Domain expertise is the bottleneck.* Leverage shifts toward people who already know the field, and know what should be possible – with knock-on effects for PhD supervision, PDRA career structures, and the value of institutional knowledge.],
-    [*The macro version of this slide:* Anthropic's own "sustained acceleration" scenario imagines 100-person teams doing 10,000-person work (Favaro & Clark, May 2026) – the substitution ratio at lab scale. *Vendor framing, treat as directional.*],
+    [*Macro version of this:* Anthropic's own "sustained acceleration" scenario imagines 100-person teams doing 10,000-person work (Favaro & Clark, May 2026) – the substitution ratio at lab scale.],
+    [*Frontier model availabilty:* Claude Fable withdrawel raises AI soverignty questions. Can home-grown or open source models catch up/compete?],
     [*None of these have settled answers.* We are running an uncontrolled experiment in real time!]
   )
   #phased-slide(title: "Outlook – funding & training implications", phases: bullets.len(), k => {
@@ -1782,7 +1781,7 @@ while not done:
     ]
   })
 ] else [
-  #phased-slide(title: "Provisional Advice for PhD students", phases: 3, k => {
+  #phased-slide(title: "Provisional Advice for PhD students", phases: 2, k => {
     phase(k, 1)[
       #block(fill: light, radius: 4pt, inset: 0.75em, width: 100%)[
         #text(size: 14pt)[
@@ -1835,7 +1834,7 @@ while not done:
         #bullet[Never paste confidential material into standard LLMs without agreement of co-authors/collaborators, because of the risk of data leakage: unpublished manuscripts, industry-partner data, proposals or papers you are reviewing. UKRI specifically prohibits AI in proposal review; most publishers prohibit it for manuscript review.]
         #bullet[Agree conventions with your supervisor/collaborators early.]
         #if version == "mpip" [
-          #bullet[Check your institution's and funders' AI policies — most now have one. Keep confidential or unpublished data out of assistants that lack an appropriate data-protection agreement.]
+          #bullet[Check your institution's and funders' AI policies – most now have one. Keep confidential or unpublished data out of assistants that lack an appropriate data-protection agreement.]
         ] else [
           #bullet[At Warwick, advised to use MS Copilot for university information as there's a data security agreement in place. If you are not using university information, you may use other AI assistants, provided you have the correct licence to access them.]
           #note[#text(size: 14pt)["If you want to generate generic computer code that does not contain any university information, you may use any AI assistant, provided you have the correct license to do so." #link("https://warwick.ac.uk/services/ris/research-integrity/airesearch/")[warwick.ac.uk/services/ris/research-integrity/airesearch]]]
@@ -1962,7 +1961,7 @@ while not done:
           #linebreak()#text(size: 10pt, fill: accent)[#link("https://missing.csail.mit.edu/2026/agentic-coding/")[missing.csail.mit.edu/2026/agentic-coding/]]]
         #bullet[*Favaro & Clark* – When AI builds itself (May 2026) #text(size: 9pt, style: "italic", fill: rgb("#666"))[· vendor view, directional]
           #linebreak()#text(size: 10pt, fill: accent)[#link("https://www.anthropic.com/institute/recursive-self-improvement")[anthropic.com/institute/recursive-self-improvement]]]
-        #bullet[*mograder* – the case study
+        #bullet[*mograder* – autograder case study, written with agentic coding
           #linebreak()#text(size: 10pt, fill: accent)[#link("https://jameskermode.github.io/mograder/")[jameskermode.github.io/mograder/]]]
       ]
     ],
@@ -1982,7 +1981,7 @@ while not done:
     columns: (auto, 1fr), gutter: 1.4em, align: horizon,
     image("figures/repo_qr.png", width: 3.2cm),
     [
-      #text(size: 16pt, weight: "bold")[Slides + source for both decks]
+      #text(size: 16pt, weight: "bold")[Slides + source]
       #v(0.2em)
       #text(size: 14pt, fill: accent)[
         #link("https://github.com/jameskermode/agentic-coding-seminar")[github.com/jameskermode/agentic-coding-seminar]
