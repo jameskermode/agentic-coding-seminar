@@ -1692,7 +1692,7 @@ while not done:
     [*Where do early-careers learn?* Unglamorous CI / build / maintenance and small new features was always how junior researchers built tacit expertise. If agents do it, the training pipeline needs reworking – not least so the next generation can supervise the agents at all.],
     [*Domain expertise is the bottleneck.* Leverage shifts toward people who already know the field, and know what should be possible – with knock-on effects for PhD supervision, PDRA career structures, and the value of institutional knowledge.],
     [*Macro version of this:* Anthropic's own "sustained acceleration" scenario imagines 100-person teams doing 10,000-person work (Favaro & Clark, May 2026) – the substitution ratio at lab scale.],
-    [*Frontier model availabilty:* Claude Fable withdrawel raises AI soverignty questions. Can home-grown or open source models catch up/compete?],
+    [*Frontier model availabilty:* Claude Fable withdrawal raises AI soverignty questions. Can home-grown or open source models catch up/compete?],
     [*None of these have settled answers.* We are running an uncontrolled experiment in real time!]
   )
   #phased-slide(title: "Outlook – funding & training implications", phases: bullets.len(), k => {
