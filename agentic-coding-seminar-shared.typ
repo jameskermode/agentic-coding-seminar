@@ -274,8 +274,8 @@
       ]
     ],
     [
-      #image("figures/si-crack-elf.png", width: 100%)
-      #text(size: 11pt, fill: gray)[DFT reference trajectory; electron localisation function shows the breaking bond at the crack tip.]
+      #image("figures/si-crack-sw-upper-fold.png", width: 100%)
+      #text(size: 11pt, fill: gray)[Reference solution at the upper fold (Stillinger–Weber), the last trapped state before the crack advances one lattice period.]
     ],
   )
   v(1fr)

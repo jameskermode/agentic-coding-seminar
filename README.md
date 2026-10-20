@@ -74,7 +74,7 @@ All eight shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and in
 │   ├── heatmap.png                                  # GitHub contribution heatmap
 │   ├── transition.png                               # weekly commit transition chart
 │   ├── heatmap-2026-10.png, transition-2026-10.png  # Oct 2026 stats re-run
-│   ├── si-crack-elf.png, hetsys-*.png               # CECAM deck illustrations
+│   ├── si-crack-sw-upper-fold.png, hetsys-*.png     # CECAM deck illustrations
 │   ├── mograder_commits.png                         # by-repo commit / kLOC bar chart
 │   └── repo_qr.png                                  # QR code for the closing slide
 ├── github_claude_stats.py                           # regenerates the chart figures
