@@ -226,7 +226,7 @@
   v(0.2em)
   phase(k, 1)[
     #block(fill: light, radius: 4pt, inset: (x: 1em, y: 0.5em), width: 100%, text(size: 13pt)[
-      *On PyPI:* 8 releases in 17 days · evidence-chosen fit weights · calibrated force uncertainties · pacemaker `.yace` in/out
+      `pip install ace-jax` · evidence-chosen fit weights · calibrated force uncertainties · pacemaker `.yace` in/out
     ])
   ]
   v(0.2em)
