@@ -176,7 +176,7 @@
 // slides sit in the `else` branch below, unindented.
 #if version == "cecam" [
 
-#let cecam-disclaimer = "Personal views as a Warwick academic and HetSys CDT director. The HetSys AI policy shown is the CDT's adopted policy; the rest is not the institutional view of the University of Warwick."
+#let cecam-disclaimer = [Personal views as a Warwick academic and #link("https://warwick.ac.uk/fac/sci/hetsys/")[#underline[HetSys CDT]] director. The HetSys AI policy shown is the CDT's adopted policy; the rest is not the institutional view of the University of Warwick.]
 
 #titleslide(
   "Effective Agentic Coding\nfor Scientific Computing",
@@ -320,15 +320,27 @@
 
 // ── CECAM 7: HetSys AI policy ────────────────────────────────
 #slide(title: "HetSys AI policy (v1.0, Aug 2026)")[
-  #text(size: 17pt)[
-    #bullet[Skill erosion is the central concern, not only rules]
-    #bullet[Build foundations by hand in PhD years 1–2: "the friction is educational"]
-    #bullet[Keep one regular problem you solve without AI]
-    #bullet[Tests use numerical tolerances you choose, not the AI]
-    #bullet[Watch for "verification theatre": code that looks verifiable but isn't]
-    #bullet[Declare substantive use — supervisors too]
-    #bullet[Everyday test: would the same help from a colleague be acceptable?]
-  ]
+  #grid(
+    columns: (1.1fr, 1fr), gutter: 1.2em,
+    [
+      #text(size: 15pt)[
+        #bullet[Skill erosion is the central concern, not only rules]
+        #bullet[Build foundations by hand in PhD years 1–2: "the friction is educational"]
+        #bullet[Keep one regular problem you solve without AI]
+        #bullet[Tests use numerical tolerances you choose, not the AI]
+        #bullet[Watch for "verification theatre": code that looks verifiable but isn't]
+        #bullet[Declare substantive use — supervisors too]
+        #bullet[Everyday test: would the same help from a colleague be acceptable?]
+      ]
+    ],
+    [
+      #align(center)[
+        #image("figures/hetsys-schematic.png", width: 100%)
+        #v(0.3em)
+        #image("figures/hetsys-jigsaw.png", height: 5.2cm)
+      ]
+    ],
+  )
   #v(1fr)
   #text(size: 13pt, fill: accent)[#link("https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/")[warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy]]
 ]
