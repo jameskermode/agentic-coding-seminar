@@ -237,30 +237,38 @@
 
 // ── CECAM 4: Terminal-Bench-Science task ─────────────────────
 #phased-slide(title: "Benchmark task: once fully specified, difficulty collapses", phases: 2, k => {
-  phase(k, 1)[
-    #text(size: 15pt)[
-      Terminal-Bench-Science `si-fracture-fbc`: Si(111) crack tip, flexible boundary conditions, Stillinger–Weber + Cauchy–Born corrector — implement from scratch, locate the lattice-trapping folds.
+  grid(
+    columns: (1fr, 8cm), gutter: 1em,
+    [
+      #phase(k, 1)[
+        #text(size: 14pt)[
+          Terminal-Bench-Science `si-fracture-fbc`: Si(111) crack tip, flexible boundary conditions, Stillinger–Weber + Cauchy–Born corrector — implement from scratch, locate the lattice-trapping folds.
+          #v(0.2em)
+          #table(
+            columns: (auto, 1fr, auto), stroke: 0.5pt + gray, inset: 4pt,
+            table.header([*Version*], [*Change*], [*Result*]),
+            [v0.1 (Aug)], [original task], [previous generation: no valid pass],
+            [Repaired], [corrected oracle (my bug)], [GPT-6 Astra: all 9 gates, 21 min, \$6.63],
+            [Hardened], [mixed-mode crossover — "a quantity that does not exist until it is computed"], [Astra: all 7 gates, 65 min],
+            [Hardened again], [adds the reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
+          )
+        ]
+      ]
       #v(0.2em)
-      #table(
-        columns: (auto, 1fr, auto), stroke: 0.5pt + gray, inset: 5pt,
-        table.header([*Version*], [*Change*], [*Result*]),
-        [v0.1 (Aug)], [original task], [previous generation: no valid pass],
-        [Repaired], [corrected oracle (my bug)], [GPT-6 Astra: all 9 gates, 21 min, \$6.63],
-        [Hardened], [mixed-mode crossover — "a quantity that does not exist until it is computed"], [Astra: all 7 gates, 65 min],
-        [Hardened again], [adds the reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
-      )
-    ]
-  ]
-  v(0.3em)
-  phase(k, 2)[
-    #twocol(
-      text(size: 14pt)[
-        *Labs now headline it:* Opus 5 29.0% → Opus 5.5 58.7%; GPT-5.6 Sol 22.4% → GPT-6 Astra 64.6%
-        #linebreak()#text(size: 11pt, fill: gray)[Opus 5.5 System Card §8.6; OpenAI GPT-6 Astra launch]
-      ],
-      warn-block[#text(size: 15pt)[Once a task is fully specified, the difficulty collapses. The human work is choosing the question.]],
-    )
-  ]
+      #phase(k, 2)[
+        #text(size: 13pt)[
+          *Labs now headline it:* Opus 5 29.0% → Opus 5.5 58.7%; GPT-5.6 Sol 22.4% → GPT-6 Astra 64.6%
+          #text(size: 10pt, fill: gray)[(Opus 5.5 System Card §8.6; OpenAI GPT-6 Astra launch)]
+        ]
+        #v(0.1em)
+        #warn-block[#text(size: 14pt)[Once a task is fully specified, the difficulty collapses. The human work is choosing the question.]]
+      ]
+    ],
+    [
+      #image("figures/si-crack-elf.png", width: 100%)
+      #text(size: 11pt, fill: gray)[DFT reference trajectory; electron localisation function shows the breaking bond at the crack tip.]
+    ],
+  )
 })
 
 // ── CECAM 5: the turn ────────────────────────────────────────
