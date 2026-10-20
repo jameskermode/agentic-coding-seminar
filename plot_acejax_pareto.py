@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Slide-sized cut of ace-jax's silicon accuracy-cost figure (panel B: A100 cost
-vs QoI error) for the CECAM deck: five ladders, larger text.
+vs QoI error) for the CECAM deck: four ladders, larger text.
 
 Reads figures/acejax-si-pareto-a100.json (the points extracted from ace-jax's
 bench/si_qoi/plot_cost.py; see its "source" field) and writes
@@ -28,7 +28,6 @@ INK, MUTED, GRID = "#1f2328", "#57606a", "#e6e6e6"
 # ace-jax's own family styles (plot_cost.py FAM), so the cut matches the docs figure
 STYLE = {  # family: (legend label, colour, marker, linestyle, filled)
     "ace":     ("linear ACE (ace-jax)",      "#2a78d6", "o", "-",  True),
-    "ace_tab": ("linear ACE, run by ML-PACE", "#2a78d6", "*", ":",  True),
     "pace":    ("PACE (pacemaker)",          "#eda100", "^", "-",  True),
     "mace_L0": ("MACE, L=0",                 "#4a3aa7", "D", "--", False),
     "mace_L1": ("MACE, L=1",                 "#4a3aa7", "D", "-",  True),
