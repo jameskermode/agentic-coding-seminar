@@ -211,36 +211,41 @@
 
 // ── CECAM 3: ace-jax ─────────────────────────────────────────
 #phased-slide(title: "ace-jax: the agent wrote the code, every test was green", phases: 2, k => {
-  twocol(
-    phase(k, 1)[
-      #text(size: 16pt)[
+  phase(k, 1)[
+    #grid(
+      columns: (0.9fr, 1.1fr), gutter: 0.8em,
+      text(size: 13pt)[
         #bullet[JAX port of ACE interatomic potentials: fitting, UQ, LAMMPS export]
-        #bullet[107 of 109 commits agent co-authored]
-        #bullet[≈20k lines of source, ≈28k lines of tests]
+        #bullet[107 of 109 commits agent co-authored; ≈20k lines of source, ≈28k of tests]
         #bullet[Parity in CI against ACEpotentials.jl and ML-PACE / python-ace, at 10#super[−12]–10#super[−14]]
         #bullet[Human work: choosing the references, the tolerances, the benchmarks, and certifying the result]
-      ]
-    ],
-    phase(k, 2)[
-      #text(size: 15pt)[
-        #bad-block[
-          *Bug \#57:* basis-builder columns misaligned. Every test was green: the Julia parity CI checked the evaluator on a model Julia had built, never ace-jax's own builder.
-        ]
-        #v(0.3em)
-        #good-block[
-          *Fix \#70:* built-basis parity against Julia (agrees to 2×10#super[−14]\; without the fix, 109/110 blocks fail), and a missing reference now fails instead of skipping.
-        ]
-      ]
-    ],
-  )
-  v(0.4em)
+      ],
+      stack(spacing: 0.15em,
+        image("figures/acejax-si-pareto-a100.png", width: 100%),
+        text(size: 10pt, fill: gray)[Silicon QoI error vs cost, one point per model size (ace-jax benchmarks)],
+      ),
+    )
+  ]
+  v(0.2em)
   phase(k, 2)[
+    #text(size: 13pt)[
+      #twocol(
+        bad-block[
+          *Bug \#57:* basis-builder columns misaligned. Every test was green: the Julia parity CI checked the evaluator on a model Julia had built, never ace-jax's own builder.
+        ],
+        good-block[
+          *Fix \#70:* built-basis parity against Julia (agrees to 2×10#super[−14]\; without the fix, 109/110 blocks fail), and a missing reference now fails instead of skipping.
+        ],
+      )
+    ]
+    #v(0.1em)
     #note[Every test was green. The gap was in the question being asked.]
   ]
   v(1fr)
   cecam-links(
     ("github.com/ACEsuit/ace-jax", "https://github.com/ACEsuit/ace-jax"),
     ("acesuit.github.io/ace-jax", "https://acesuit.github.io/ace-jax/"),
+    ("benchmarks", "https://acesuit.github.io/ace-jax/benchmarks/#accuracy-and-cost-silicon"),
   )
 })
 

@@ -1,0 +1,168 @@
+{
+ "source": "ace-jax origin/main 78fa15e: bench/si_qoi/plot_cost.py collect() with results/cost_sulis_gpu.json (A100) and QoI property files from ~/silicon-testing-framework; panel B of docs/user/assets/benchmarks/si_accuracy_cost.png",
+ "x": "A100 GPU cost, microseconds per atom per MD step (LAMMPS, float64)",
+ "y": "QoI error: geometric mean over 21 silicon QoIs of |error|/tolerance vs DFT",
+ "target_qoi": 0.5,
+ "series": {
+  "ace": {
+   "label": "linear ACE",
+   "points": [
+    {
+     "size": "o3d8",
+     "cost_us": 0.31900634765625,
+     "qoi": 2.943
+    },
+    {
+     "size": "o3d10",
+     "cost_us": 0.3143829345703125,
+     "qoi": 1.896
+    },
+    {
+     "size": "o3d12",
+     "cost_us": 0.5201141357421875,
+     "qoi": 1.029
+    },
+    {
+     "size": "o4d12",
+     "cost_us": 0.5501571655273437,
+     "qoi": 0.756
+    },
+    {
+     "size": "o4d14",
+     "cost_us": 0.590789794921875,
+     "qoi": 0.861
+    },
+    {
+     "size": "o4d16",
+     "cost_us": 0.9227935791015626,
+     "qoi": 0.641
+    },
+    {
+     "size": "o4d20",
+     "cost_us": 3.1203002929687504,
+     "qoi": 0.385
+    }
+   ]
+  },
+  "ace_tab": {
+   "label": "linear ACE, run by ML-PACE",
+   "points": [
+    {
+     "size": "o4d12",
+     "cost_us": 0.27729644775390627,
+     "qoi": 0.756
+    },
+    {
+     "size": "o4d14",
+     "cost_us": 0.44931488037109374,
+     "qoi": 0.861
+    },
+    {
+     "size": "o4d16",
+     "cost_us": 0.8283645629882812,
+     "qoi": 0.641
+    },
+    {
+     "size": "o4d20",
+     "cost_us": 4.1307525634765625,
+     "qoi": 0.385
+    }
+   ]
+  },
+  "pace": {
+   "label": "PACE (pacemaker)",
+   "points": [
+    {
+     "size": "f50",
+     "cost_us": 0.1547637939453125,
+     "qoi": 2.109
+    },
+    {
+     "size": "f100",
+     "cost_us": 0.20190582275390626,
+     "qoi": 1.926
+    },
+    {
+     "size": "f200",
+     "cost_us": 0.23799133300781253,
+     "qoi": 1.481
+    },
+    {
+     "size": "f400",
+     "cost_us": 0.3381866455078125,
+     "qoi": 0.839
+    },
+    {
+     "size": "f800",
+     "cost_us": 0.6279312133789063,
+     "qoi": 0.764
+    },
+    {
+     "size": "f1040",
+     "cost_us": 0.9570846557617188,
+     "qoi": 0.865
+    },
+    {
+     "size": "f1352",
+     "cost_us": 1.2687454223632812,
+     "qoi": 0.807
+    },
+    {
+     "size": "f1758",
+     "cost_us": 1.575469970703125,
+     "qoi": 0.755
+    },
+    {
+     "size": "f2285",
+     "cost_us": 2.2105560302734375,
+     "qoi": 0.587
+    },
+    {
+     "size": "f2971",
+     "cost_us": 3.07122802734375,
+     "qoi": 0.547
+    },
+    {
+     "size": "f3200",
+     "cost_us": 3.60791015625,
+     "qoi": 0.583
+    }
+   ]
+  },
+  "mace_L0": {
+   "label": "MACE, L=0",
+   "points": [
+    {
+     "size": "c8L0",
+     "cost_us": 1.7862548828125,
+     "qoi": 0.727
+    },
+    {
+     "size": "c16L0",
+     "cost_us": 1.927947998046875,
+     "qoi": 0.415
+    },
+    {
+     "size": "c32L0",
+     "cost_us": 2.25030517578125,
+     "qoi": 0.38
+    }
+   ]
+  },
+  "mace_L1": {
+   "label": "MACE, L=1",
+   "points": [
+    {
+     "size": "c16L1",
+     "cost_us": 5.361251831054688,
+     "qoi": 0.335
+    },
+    {
+     "size": "c32L1",
+     "cost_us": 6.148139953613281,
+     "qoi": 0.315
+    }
+   ]
+  }
+ }
+}

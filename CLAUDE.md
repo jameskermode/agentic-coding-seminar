@@ -97,6 +97,9 @@ keeps the figures used by already-delivered decks unchanged), plus three JSON si
 `contribution_calendar.json`). Those JSON files are neither committed nor
 gitignored. `figures/mograder_commits.png` and `figures/repo_qr.png` are not
 produced by the script; the QR code came from the `qrcode` library's `qr` CLI.
+`plot_acejax_pareto.py` (`uv run --with matplotlib plot_acejax_pareto.py`) redraws
+the CECAM ace-jax figure from `figures/acejax-si-pareto-a100.json`, whose
+`source` field records how the points were extracted from ace-jax.
 The shared deck consumes the PNGs via `image("figures/...")`. The script
 authenticates through the `gh` CLI.
 

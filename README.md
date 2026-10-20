@@ -76,9 +76,11 @@ All eight shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and in
 │   ├── heatmap-2026-10.png, transition-2026-10.png  # Oct 2026 stats re-run
 │   ├── heatmap-2y-2026-10.png                       # 2-year heatmap (--heatmap-years 2), CECAM close
 │   ├── si-crack-sw-upper-fold.png, hetsys-*.png     # CECAM deck illustrations
+│   ├── acejax-si-pareto-a100.{json,png}             # ace-jax Si accuracy vs A100 cost (plot_acejax_pareto.py)
 │   ├── mograder_commits.png                         # by-repo commit / kLOC bar chart
 │   └── repo_qr.png                                  # QR code for the closing slide
 ├── github_claude_stats.py                           # regenerates the chart figures
+├── plot_acejax_pareto.py                            # ace-jax Pareto cut for the CECAM deck
 ├── LICENSE                                          # CC-BY-4.0
 └── README.md
 ```
