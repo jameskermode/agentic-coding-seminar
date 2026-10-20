@@ -215,16 +215,19 @@
     #grid(
       columns: (0.9fr, 1.1fr), gutter: 0.8em,
       text(size: 13pt)[
-        #bullet[JAX port of ACE interatomic potentials: fitting, UQ, LAMMPS export]
+        #bullet[JAX port of ACE interatomic potentials, CPU and GPU]
         #bullet[107 of 109 commits agent co-authored; ≈20k lines of source, ≈28k of tests]
         #bullet[Parity in CI against ACEpotentials.jl and ML-PACE / python-ace, at 10#super[−12]–10#super[−14]]
         #bullet[Human work: choosing the references, the tolerances, the benchmarks, and certifying the result]
       ],
-      stack(spacing: 0.15em,
-        image("figures/acejax-si-pareto-a100.png", width: 100%),
-        text(size: 10pt, fill: gray)[Silicon QoI error vs cost, one point per model size (ace-jax benchmarks)],
-      ),
+      image("figures/acejax-si-pareto-a100.png", width: 100%),
     )
+  ]
+  v(0.2em)
+  phase(k, 1)[
+    #block(fill: light, radius: 4pt, inset: (x: 1em, y: 0.5em), width: 100%, text(size: 13pt)[
+      *On PyPI:* 8 releases in 17 days · evidence-chosen fit weights · calibrated force uncertainties · pacemaker `.yace` in/out
+    ])
   ]
   v(0.2em)
   phase(k, 2)[
@@ -238,8 +241,6 @@
         ],
       )
     ]
-    #v(0.1em)
-    #note[Every test was green. The gap was in the question being asked.]
   ]
   v(1fr)
   cecam-links(
