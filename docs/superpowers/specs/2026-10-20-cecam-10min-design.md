@@ -134,7 +134,7 @@ figures). No public per-task v0.1 results were found; the hub page is
 JS-rendered, so "nothing passed in the official evals" is unverified. In
 pre-merge CI on PR #450:
 - Opus 4.8 passed 1 of 3 trials (131 min, $23.70). This may be the
-  temporary-hint run; James to confirm.
+  temporary-hint run or a tolerance artefact; James is unsure. Do not cite it.
 - GPT-5.5 passed 0/3.
 - GPT-5.6 Sol passed 0/3 twice.
 
