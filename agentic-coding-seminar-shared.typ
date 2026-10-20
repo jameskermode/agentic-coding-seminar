@@ -256,15 +256,16 @@
     [
       #phase(k, 1)[
         #text(size: 14pt)[
-          Terminal-Bench-Science `si-fracture-fbc`: Si(111) crack tip, flexible boundary conditions, Stillinger–Weber + Cauchy–Born corrector — implement from scratch, locate the lattice-trapping folds.
+          Terminal-Bench-Science `si-fracture-fbc`: Si(111) crack tip, Stillinger–Weber, flexible boundary + Cauchy–Born corrector. Implement from scratch; locate the lattice-trapping folds.
           #v(0.2em)
           #table(
             columns: (auto, 1fr, auto), stroke: 0.5pt + gray, inset: 4pt,
             table.header([*Version*], [*Change*], [*Result*]),
             [v0.1 (Aug)], [original task], [previous generation: no valid pass],
             [Repaired], [corrected oracle (my bug)], [GPT-6 Astra: all 9 gates, 21 min, \$6.63],
-            [Hardened], [mixed-mode crossover — "a quantity that does not exist until it is computed"], [Astra: all 7 gates, 65 min],
-            [Hardened again], [adds the reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
+            [Hardened], [mixed-mode crossover], [Astra: all 7 gates, 65 min],
+            [Hardened again], [reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
+            [3D follow-up], [crack-front kinks, free energy at 600 K (≈40~h expert task)], [Opus 5.5 ✓, ≈1.5 h, key physics unprompted],
           )
         ]
       ]
@@ -274,13 +275,15 @@
           *Labs now headline it:* Opus 5 29.0% → Opus 5.5 58.7%; GPT-5.6 Sol 22.4% → GPT-6 Astra 64.6%
           #text(size: 10pt, fill: gray)[(Opus 5.5 System Card §8.6; OpenAI GPT-6 Astra launch)]
         ]
-        #v(0.1em)
-        #warn-block[#text(size: 14pt)[Once a task is fully specified, the difficulty collapses. The human work is choosing the question.]]
       ]
     ],
     [
       #image("figures/si-crack-sw-upper-fold.png", width: 100%)
-      #text(size: 11pt, fill: gray)[Reference solution at the upper fold (Stillinger–Weber), the last trapped state before the crack advances one lattice period. Gold: under-coordinated atoms.]
+      #text(size: 10pt, fill: gray)[Reference solution at the upper fold (Stillinger–Weber), the last trapped state before the crack advances one lattice period. Gold: under-coordinated atoms.]
+      #v(0.3em)
+      #phase(k, 2)[
+        #warn-block[#text(size: 14pt)[Once a task is fully specified, the difficulty collapses. The human work is choosing the question.]]
+      ]
     ],
   )
   v(1fr)
