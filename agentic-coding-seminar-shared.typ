@@ -275,7 +275,7 @@
     ],
     [
       #image("figures/si-crack-sw-upper-fold.png", width: 100%)
-      #text(size: 11pt, fill: gray)[Reference solution at the upper fold (Stillinger–Weber), the last trapped state before the crack advances one lattice period.]
+      #text(size: 11pt, fill: gray)[Reference solution at the upper fold (Stillinger–Weber), the last trapped state before the crack advances one lattice period. Gold: under-coordinated atoms.]
     ],
   )
   v(1fr)
