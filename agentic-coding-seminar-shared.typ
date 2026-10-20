@@ -2,10 +2,11 @@
 // Effective Agentic Coding for Scientific Computing
 // James Kermode · School of Engineering, University of Warwick
 //
-// Three delivered talks share this source:
+// Four talks share this source:
 //   research:  Predictive Modelling Discussion Group + HetSys CDT, Warwick (30 Apr 2026)
 //   brookes:   Oxford Brookes · AI & Data Analysis Network        (6 May 2026)
 //   mpip:      Max Planck Institute for Polymer Research          (15 Jun 2026)
+//   cecam:     CECAM Mary Ann Mansigh Lecture (online, 10 min)    (27 Oct 2026)
 //
 // Build (each shim is one line — `#import` + `#deck(...)`):
 //   typst compile agentic-coding-seminar-research.typ
@@ -14,6 +15,8 @@
 //   typst compile agentic-coding-seminar-brookes-handout.typ
 //   typst compile agentic-coding-seminar-mpip.typ
 //   typst compile agentic-coding-seminar-mpip-handout.typ
+//   typst compile agentic-coding-seminar-cecam.typ
+//   typst compile agentic-coding-seminar-cecam-handout.typ
 //
 // `version` (string) is checked at slides that diverge between audiences:
 // title, thesis (brookes-only), the case-study region (mograder-first vs.
@@ -25,6 +28,10 @@
 // the title, responsible-use, and discussion slides, and is trimmed to ~45
 // min: four research slides are wrapped in `#if version != "mpip"` (the
 // heatmap, Commit Analysis, Atomistica, and the mograder case study).
+//
+// `cecam` (CECAM Mary Ann Mansigh Lecture, online, 27 Oct 2026) is a
+// separate 10-minute talk: it branches right after the helpers and shares
+// no slides with the other three, which all sit in that branch's `else`.
 //
 // `handout: true` collapses every `phased-slide` to its final phase only,
 // producing a shareable post-talk PDF without the build-up pages. Reveals are
@@ -163,6 +170,45 @@
 // ============================================================
 // SLIDES
 // ============================================================
+
+// ── CECAM: a separate 10-minute deck ─────────────────────────
+// Branches here and shares no slides with the other versions; their
+// slides sit in the `else` branch below, unindented.
+#if version == "cecam" [
+
+#let cecam-disclaimer = "Personal views as a Warwick academic and HetSys CDT director. The HetSys AI policy shown is the CDT's adopted policy; the rest is not the institutional view of the University of Warwick."
+
+#titleslide(
+  "Effective Agentic Coding\nfor Scientific Computing",
+  "The code is the easy part: asking the questions, checking the answers, and training who does both",
+  "James Kermode · School of Engineering, University of Warwick",
+  "27 October 2026 · CECAM Mary Ann Mansigh Lecture (online)",
+  disclaimer: cecam-disclaimer,
+)
+
+// ── CECAM close ──────────────────────────────────────────────
+#slide(title: "Discussion")[
+  #v(1em)
+  #block(fill: light, radius: 6pt, inset: 1.4em, width: 100%)[
+    #text(size: 23pt, weight: "bold")[
+      Who will train the researchers of the future, if we outsource all coding to agents now?
+    ]
+  ]
+  #v(1fr)
+  #grid(
+    columns: (auto, 1fr), gutter: 1.4em, align: horizon,
+    image("figures/repo_qr.png", width: 3.2cm),
+    [
+      #text(size: 16pt, weight: "bold")[Full talk, slides + source]
+      #v(0.2em)
+      #text(size: 14pt, fill: accent)[
+        #link("https://github.com/jameskermode/agentic-coding-seminar")[github.com/jameskermode/agentic-coding-seminar]
+      ]
+    ],
+  )
+]
+
+] else [
 
 // ── 1. Title (version-specific) ──────────────────────────────
 #let warwick-disclaimer = "Personal experience as a Warwick academic and HetSys CDT director — not the institutional view of the University of Warwick. Warwick's AI strategy is being developed separately."
@@ -1991,5 +2037,7 @@ while not done:
     ],
   )
 ]
+
+] // end of `#if version == "cecam" [...] else [...]`
 
 ] // end of #let deck(version, handout: false) = [...]
