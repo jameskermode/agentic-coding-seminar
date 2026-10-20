@@ -206,7 +206,7 @@
 ]
 
 // ── CECAM 3: ace-jax ─────────────────────────────────────────
-#phased-slide(title: "ace-jax: the agent wrote the code, the tests found the gap", phases: 2, k => {
+#phased-slide(title: "ace-jax: the agent wrote the code, every test was green", phases: 2, k => {
   twocol(
     phase(k, 1)[
       #text(size: 16pt)[
@@ -245,8 +245,8 @@
         columns: (auto, 1fr, auto), stroke: 0.5pt + gray, inset: 5pt,
         table.header([*Version*], [*Change*], [*Result*]),
         [v0.1 (Aug)], [original task], [previous generation: no valid pass],
-        [Repaired], [corrected oracle (my bug)], [GPT-6 Astra 9/9, 21 min, \$6.63],
-        [Hardened], [mixed-mode crossover — "a quantity that does not exist until it is computed"], [Astra 7/7, 65 min],
+        [Repaired], [corrected oracle (my bug)], [GPT-6 Astra: all 9 gates, 21 min, \$6.63],
+        [Hardened], [mixed-mode crossover — "a quantity that does not exist until it is computed"], [Astra: all 7 gates, 65 min],
         [Hardened again], [adds the reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
       )
     ]
@@ -376,7 +376,7 @@
 // ── CECAM close ──────────────────────────────────────────────
 #slide(title: "Discussion")[
   #align(center, image("figures/transition-2026-10.png", width: 92%))
-  #align(right, text(size: 12pt, fill: gray)[My repos: 2,332 Claude co-authored commits across 52 repositories since March 2025.])
+  #align(right, text(size: 12pt, fill: gray)[My commits: 2,332 Claude co-authored, across 52 repositories (Oct 2025 – Oct 2026).])
   #v(0.4em)
   #block(fill: light, radius: 6pt, inset: 1.2em, width: 100%)[
     #text(size: 22pt, weight: "bold")[
