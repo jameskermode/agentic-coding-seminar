@@ -186,6 +186,106 @@
   disclaimer: cecam-disclaimer,
 )
 
+// ── CECAM 2: push back on "validation relies on AI" ──────────
+#slide(title: "The end of human programming?")[
+  #v(0.3em)
+  #note[
+    "The end of human programming?" \
+    "At the VASP Software GmbH, about 70% of our team now uses multi-agent LLM pools to develop software."
+    #align(right)[#text(size: 14pt, style: "normal")[— G. Kresse, CECAM abstract, 27 Oct 2026]]
+  ]
+  #v(0.4em)
+  #text(size: 17pt)[Code now arrives faster than humans can review it, so validation and regression testing are handed to AI too.]
+  #v(0.6em)
+  #warn-block[
+    If validation relies on AI, the human skill that is left is knowing *what to validate against*
+    and *which question to ask*.
+    #v(0.3em)
+    *Where does the next generation learn that?*
+  ]
+]
+
+// ── CECAM 3: ace-jax ─────────────────────────────────────────
+#phased-slide(title: "ace-jax: the agent wrote the code, the tests found the gap", phases: 2, k => {
+  twocol(
+    phase(k, 1)[
+      #text(size: 16pt)[
+        #bullet[JAX port of ACE interatomic potentials: fitting, UQ, LAMMPS export]
+        #bullet[*107 of 109* commits agent co-authored]
+        #bullet[≈20k lines of source, *≈28k lines of tests*]
+        #bullet[Parity in CI against *ACEpotentials.jl* and *ML-PACE / python-ace*, at 10#super[−12]–10#super[−14]]
+        #bullet[Human work: choosing the references, the tolerances, the benchmarks, and *certifying* the result]
+      ]
+    ],
+    phase(k, 2)[
+      #text(size: 15pt)[
+        #bad-block[
+          *Bug \#57:* basis-builder columns misaligned. Every test was green: the Julia parity CI checked the *evaluator* on a model Julia had built, never ace-jax's own builder.
+        ]
+        #v(0.3em)
+        #good-block[
+          *Fix \#70:* built-basis parity against Julia (agrees to 2×10#super[−14]\; without the fix, 109/110 blocks fail), and a missing reference now *fails* instead of skipping.
+        ]
+      ]
+    ],
+  )
+  v(0.4em)
+  phase(k, 2)[
+    #note[Every test was green. The gap was in the question being asked.]
+  ]
+})
+
+// ── CECAM 4: Terminal-Bench-Science task ─────────────────────
+#phased-slide(title: "Benchmark task: once fully specified, difficulty collapses", phases: 2, k => {
+  phase(k, 1)[
+    #text(size: 15pt)[
+      Terminal-Bench-Science `si-fracture-fbc`: Si(111) crack tip, flexible boundary conditions, Stillinger–Weber + Cauchy–Born corrector — implement from scratch, locate the lattice-trapping folds.
+      #v(0.2em)
+      #table(
+        columns: (auto, 1fr, auto), stroke: 0.5pt + gray, inset: 5pt,
+        table.header([*Version*], [*Change*], [*Result*]),
+        [v0.1 (Aug)], [original task], [previous generation: *no valid pass*],
+        [Repaired], [corrected oracle (my bug)], [GPT-6 Astra *9/9*, 21 min, \$6.63],
+        [Hardened], [mixed-mode crossover — "a quantity that does not exist until it is computed"], [Astra *7/7*, 65 min],
+        [Hardened again], [adds the reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
+      )
+    ]
+  ]
+  v(0.3em)
+  phase(k, 2)[
+    #twocol(
+      text(size: 14pt)[
+        *Labs now headline it:* Opus 5 29.0% → Opus 5.5 *58.7%*; GPT-5.6 Sol 22.4% → GPT-6 Astra *64.6%*
+        #linebreak()#text(size: 11pt, fill: gray)[Opus 5.5 System Card §8.6; OpenAI GPT-6 Astra launch]
+      ],
+      warn-block[#text(size: 15pt)[Once a task is fully specified, the difficulty collapses. *The human work is choosing the question.*]],
+    )
+  ]
+})
+
+// ── CECAM 5: the turn ────────────────────────────────────────
+#slide(title: "Where did we learn to do this?")[
+  #v(0.3em)
+  #twocol(
+    block(fill: light, radius: 4pt, inset: 1em, width: 100%)[
+      *Asking the question*
+      #v(0.2em)
+      #text(size: 18pt)[The benchmark: specification is now the hard part; implementation is not.]
+    ],
+    block(fill: light, radius: 4pt, inset: 1em, width: 100%)[
+      *Deciding what counts as correct*
+      #v(0.2em)
+      #text(size: 18pt)[ace-jax: consistency checks are not correctness checks. Green CI ≠ right answer.]
+    ],
+  )
+  #v(0.8em)
+  #warn-block[
+    These skills came from struggle: years of debugging, deriving, and being wrong.
+    #v(0.2em)
+    *Without struggle-as-pedagogy, they will not be automatic.*
+  ]
+]
+
 // ── CECAM close ──────────────────────────────────────────────
 #slide(title: "Discussion")[
   #v(1em)
