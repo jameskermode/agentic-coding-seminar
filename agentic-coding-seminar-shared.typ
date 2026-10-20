@@ -405,7 +405,7 @@
 
 // ── CECAM close ──────────────────────────────────────────────
 #slide(title: "Discussion")[
-  #align(center, image("figures/heatmap-2026-10.png", width: 92%))
+  #align(center, image("figures/heatmap-2y-2026-10.png", width: 100%))
   #align(right, text(size: 12pt, fill: gray)[My commits: 2,332 Claude co-authored, across 52 repositories (Oct 2025 – Oct 2026).])
   #v(0.4em)
   #block(fill: light, radius: 6pt, inset: 1.2em, width: 100%)[

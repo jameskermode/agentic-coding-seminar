@@ -218,7 +218,9 @@ def git_numstat(git_dir: Path, shas: list[str]) -> tuple[int, int]:
     return total_add, total_del
 
 
-def fetch_contribution_calendar() -> dict[str, int]:
+def fetch_contribution_calendar(years: int = 1) -> dict[str, int]:
+    """Daily contribution counts ending HEATMAP_TO. The API caps each query at
+    one year, so longer windows are fetched one year at a time."""
     query = """query($from:DateTime!,$to:DateTime!){
       user(login:"jameskermode"){
         contributionsCollection(from:$from,to:$to){
@@ -229,18 +231,21 @@ def fetch_contribution_calendar() -> dict[str, int]:
         }
       }
     }"""
-    data = gh_graphql(
-        query,
-        **{
-            "from": HEATMAP_FROM.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "to": HEATMAP_TO.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        },
-    )
-    cal = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
     days: dict[str, int] = {}
-    for week in cal["weeks"]:
-        for d in week["contributionDays"]:
-            days[d["date"]] = d["contributionCount"]
+    for i in range(years):
+        to = HEATMAP_TO - timedelta(days=365 * i)
+        frm = (to - timedelta(days=364)).replace(hour=0, minute=0, second=0)
+        data = gh_graphql(
+            query,
+            **{
+                "from": frm.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "to": to.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            },
+        )
+        cal = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+        for week in cal["weeks"]:
+            for d in week["contributionDays"]:
+                days[d["date"]] = d["contributionCount"]
     return days
 
 # ── Categorisation ────────────────────────────────────────────────────────────
@@ -275,8 +280,9 @@ def _short_repo(full_name: str) -> str:
     return full_name.split("/", 1)[1]
 
 
-def render_heatmap(days: dict[str, int], path: Path) -> None:
-    """GitHub-style contribution heatmap: 53 weeks × 7 days."""
+def render_heatmap(days: dict[str, int], path: Path, years: int = 1) -> None:
+    """GitHub-style contribution heatmap: 53 weeks × 7 days per year. With
+    years > 1, January labels carry the year and TRANSITION_MARK is drawn."""
     dates = sorted(days)
     if not dates:
         return
@@ -319,8 +325,9 @@ def render_heatmap(days: dict[str, int], path: Path) -> None:
     prev_month = None
     for col in range(n_weeks):
         d = start + timedelta(days=col * 7)
-        if d.month != prev_month:
-            month_ticks.append((col * (cell + gap), d.strftime("%b")))
+        if d.month != prev_month and (years == 1 or d.month in (1, 4, 7, 10)):
+            fmt = "%b %Y" if years > 1 and d.month == 1 else "%b"
+            month_ticks.append((col * (cell + gap), d.strftime(fmt)))
             prev_month = d.month
     for x, label in month_ticks:
         ax.text(x, 7 * (cell + gap) + 0.1, label,
@@ -332,13 +339,23 @@ def render_heatmap(days: dict[str, int], path: Path) -> None:
         ax.text(-0.4, y, label, ha="right", va="center",
                 fontsize=8, color="#444")
 
+    if years > 1:
+        mark = TRANSITION_MARK.replace(tzinfo=None)
+        if start <= mark <= end:
+            x = ((mark - start).days // 7) * (cell + gap) - gap / 2
+            ax.plot([x, x], [-0.3, 7 * (cell + gap) + 0.9],
+                    color="#0B4F8A", lw=1.2, ls="--")
+            ax.text(x + 0.3, -0.3, TRANSITION_MARK.strftime("%b %Y") + ": first sustained Claude usage",
+                    ha="left", va="top", fontsize=8, color="#0B4F8A", weight="bold")
+
     ax.set_xlim(-1.2, n_weeks * (cell + gap) + 0.2)
     ax.set_ylim(-0.3, 7 * (cell + gap) + 1.0)
     ax.set_aspect("equal")
     ax.axis("off")
 
     total = sum(days.values())
-    ax.text(0, -0.3, f"{total:,} contributions in the last year",
+    period = "the last year" if years == 1 else f"the last {years} years"
+    ax.text(0, -0.3, f"{total:,} contributions in {period}",
             ha="left", va="top", fontsize=8, color="#444", style="italic")
 
     fig.savefig(path, bbox_inches="tight", dpi=200, transparent=True)
@@ -432,6 +449,10 @@ def main() -> None:
         "--fig-suffix", default="",
         help="suffix for the figure filenames, e.g. -2026-10 → heatmap-2026-10.png",
     )
+    parser.add_argument(
+        "--heatmap-years", type=int, default=1,
+        help="years of contributions in the heatmap (default 1, as on GitHub)",
+    )
     args = parser.parse_args()
 
     preflight_auth()
@@ -512,7 +533,7 @@ def main() -> None:
 
     # ── Contribution calendar ──
     print("\nFetching contribution calendar…")
-    calendar = fetch_contribution_calendar()
+    calendar = fetch_contribution_calendar(args.heatmap_years)
     print(f"  {len(calendar)} days · {sum(calendar.values())} total contributions")
 
     # ── Print summary tables ──
@@ -551,7 +572,7 @@ def main() -> None:
 
     (HERE / "contribution_calendar.json").write_text(json.dumps({
         "generated": datetime.now().isoformat(),
-        "from": HEATMAP_FROM.strftime("%Y-%m-%d"),
+        "from": min(calendar) if calendar else HEATMAP_FROM.strftime("%Y-%m-%d"),
         "to": HEATMAP_TO.strftime("%Y-%m-%d"),
         "days": calendar,
     }, indent=2))
@@ -560,7 +581,7 @@ def main() -> None:
     print("\nRendering figures…")
     heatmap_png = FIG_DIR / f"heatmap{args.fig_suffix}.png"
     transition_png = FIG_DIR / f"transition{args.fig_suffix}.png"
-    render_heatmap(calendar, heatmap_png)
+    render_heatmap(calendar, heatmap_png, args.heatmap_years)
     render_weekly_transition(
         {k: timeseries[k] for k in sorted(timeseries)},
         transition_png,
