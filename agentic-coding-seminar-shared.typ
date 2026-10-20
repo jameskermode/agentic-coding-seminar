@@ -176,6 +176,10 @@
 // slides sit in the `else` branch below, unindented.
 #if version == "cecam" [
 
+// Footer row of links: `cecam-links(("label", "url"), ...)`.
+#let cecam-links(..pairs) = text(size: 12pt, fill: accent,
+  pairs.pos().map(((label, url)) => link(url, label)).join([ #h(0.3em)·#h(0.3em) ]))
+
 #let cecam-disclaimer = [Personal views as a Warwick academic and #link("https://warwick.ac.uk/fac/sci/hetsys/")[#underline[HetSys CDT]] director. The HetSys AI policy shown is the CDT's adopted policy; the rest is not the institutional view of the University of Warwick.]
 
 #titleslide(
@@ -233,6 +237,11 @@
   phase(k, 2)[
     #note[Every test was green. The gap was in the question being asked.]
   ]
+  v(1fr)
+  cecam-links(
+    ("github.com/ACEsuit/ace-jax", "https://github.com/ACEsuit/ace-jax"),
+    ("acesuit.github.io/ace-jax", "https://acesuit.github.io/ace-jax/"),
+  )
 })
 
 // ── CECAM 4: Terminal-Bench-Science task ─────────────────────
@@ -268,6 +277,11 @@
       #image("figures/si-crack-elf.png", width: 100%)
       #text(size: 11pt, fill: gray)[DFT reference trajectory; electron localisation function shows the breaking bond at the crack tip.]
     ],
+  )
+  v(1fr)
+  cecam-links(
+    ("terminal-bench-science.ai", "https://www.terminal-bench-science.ai/"),
+    ("task: si-fracture-fbc", "https://github.com/harbor-framework/terminal-bench-science/tree/main/tasks/physical-sciences/materials-science/si-fracture-fbc"),
   )
 })
 
@@ -350,7 +364,10 @@
     ],
   )
   #v(1fr)
-  #text(size: 13pt, fill: accent)[#link("https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/")[warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy]]
+  #cecam-links(
+    ("warwick.ac.uk/hetsys", "https://warwick.ac.uk/fac/sci/hetsys/"),
+    ("AI policy", "https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/"),
+  )
 ]
 
 // ── CECAM 8: mograder — assessing understanding ──────────────
@@ -379,6 +396,11 @@
   )
   #v(0.3em)
   #note[#text(size: 15pt)[Delegate pattern-matching — did the code produce the right answer? — to the machine; keep the human question — did the student understand? — for humans.]]
+  #v(1fr)
+  #cecam-links(
+    ("github.com/jameskermode/mograder", "https://github.com/jameskermode/mograder"),
+    ("jameskermode.github.io/mograder", "https://jameskermode.github.io/mograder/"),
+  )
 ]
 
 // ── CECAM close ──────────────────────────────────────────────
