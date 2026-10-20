@@ -282,7 +282,8 @@ def _short_repo(full_name: str) -> str:
 
 def render_heatmap(days: dict[str, int], path: Path, years: int = 1) -> None:
     """GitHub-style contribution heatmap: 53 weeks × 7 days per year. With
-    years > 1, January labels carry the year and TRANSITION_MARK is drawn."""
+    years > 1, January labels carry the year and TRANSITION_MARK is drawn
+    as an unlabelled dashed line."""
     dates = sorted(days)
     if not dates:
         return
@@ -345,8 +346,6 @@ def render_heatmap(days: dict[str, int], path: Path, years: int = 1) -> None:
             x = ((mark - start).days // 7) * (cell + gap) - gap / 2
             ax.plot([x, x], [-0.3, 7 * (cell + gap) + 0.9],
                     color="#0B4F8A", lw=1.2, ls="--")
-            ax.text(x + 0.3, -0.3, TRANSITION_MARK.strftime("%b %Y") + ": first sustained Claude usage",
-                    ha="left", va="top", fontsize=8, color="#0B4F8A", weight="bold")
 
     ax.set_xlim(-1.2, n_weeks * (cell + gap) + 0.2)
     ax.set_ylim(-0.3, 7 * (cell + gap) + 1.0)
