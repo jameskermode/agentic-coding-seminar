@@ -10,10 +10,14 @@ Produces:
     contribution_calendar.json       daily GitHub contribution counts
     figures/heatmap.png              GitHub-style contribution heatmap
     figures/transition.png           weekly commits with Nov-2025 inflection
+
+Pass --fig-suffix=-2026-10 (with "=", as the value starts with "-") to write figures/heatmap-2026-10.png etc. instead,
+leaving the figures used by earlier decks untouched.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import shutil
@@ -423,6 +427,13 @@ def render_weekly_transition(timeseries: dict[str, dict[str, int]], path: Path) 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument(
+        "--fig-suffix", default="",
+        help="suffix for the figure filenames, e.g. -2026-10 → heatmap-2026-10.png",
+    )
+    args = parser.parse_args()
+
     preflight_auth()
     CLONE_DIR.mkdir(exist_ok=True)
     FIG_DIR.mkdir(exist_ok=True)
@@ -547,13 +558,15 @@ def main() -> None:
 
     # ── Figures ──
     print("\nRendering figures…")
-    render_heatmap(calendar, FIG_DIR / "heatmap.png")
+    heatmap_png = FIG_DIR / f"heatmap{args.fig_suffix}.png"
+    transition_png = FIG_DIR / f"transition{args.fig_suffix}.png"
+    render_heatmap(calendar, heatmap_png)
     render_weekly_transition(
         {k: timeseries[k] for k in sorted(timeseries)},
-        FIG_DIR / "transition.png",
+        transition_png,
     )
-    print(f"  wrote {FIG_DIR}/heatmap.png")
-    print(f"  wrote {FIG_DIR}/transition.png")
+    print(f"  wrote {heatmap_png}")
+    print(f"  wrote {transition_png}")
 
 
 if __name__ == "__main__":
