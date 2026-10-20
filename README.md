@@ -1,14 +1,15 @@
 # Effective Agentic Coding for Scientific Computing
 
-Slides from three delivered seminars by [James Kermode](https://warwick.ac.uk/jrkermode), University of Warwick. All three versions share a single Typst source.
+Slides from four seminars by [James Kermode](https://warwick.ac.uk/jrkermode), University of Warwick. All four versions share a single Typst source.
 
 | Talk | Audience | Date | Handout |
 |------|----------|------|---------|
 | **Research version** | Predictive Modelling Discussion Group + HetSys CDT, University of Warwick | 30 April 2026 | [📄 PDF](agentic-coding-seminar-research-handout.pdf) |
 | **Brookes version** | Oxford Brookes · AI & Data Analysis Network | 6 May 2026 | [📄 PDF](agentic-coding-seminar-brookes-handout.pdf) |
 | **MPIP version** | Max Planck Institute for Polymer Research | 15 June 2026 | [📄 PDF](agentic-coding-seminar-mpip-handout.pdf) |
+| **CECAM version** | CECAM Mary Ann Mansigh Lecture *Who writes the code?*, EPFL (online) | 27 October 2026 | [📄 PDF](agentic-coding-seminar-cecam-handout.pdf) |
 
-The three decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study. The MPIP version is a trimmed (~45 min) cut of the research version for a computational-science audience: it drops the `mograder` case study and a few detail slides.
+The three decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study. The MPIP version is a trimmed (~45 min) cut of the research version for a computational-science audience: it drops the `mograder` case study and a few detail slides. The CECAM version is a separate 10-minute talk on training the next generation: ace-jax and a Terminal-Bench-Science task as evidence that the human work has moved to asking the questions and deciding what counts as correct, then the HetSys AI policy and `mograder` as a response. Its patterns slide lists headlines only and links back here for the full versions.
 
 Discussion: [LinkedIn post](https://www.linkedin.com/posts/james-kermode-b97147284_effective-agentic-coding-for-scientific-computing-activity-7457797781534011392-N-d9).
 
@@ -44,15 +45,19 @@ typst compile agentic-coding-seminar-brookes-handout.typ   # one page per logica
 # MPIP version (trimmed ~45 min cut of the research deck)
 typst compile agentic-coding-seminar-mpip.typ              # full live deck (phase reveals)
 typst compile agentic-coding-seminar-mpip-handout.typ      # one page per logical slide
+
+# CECAM version (separate 10 min talk)
+typst compile agentic-coding-seminar-cecam.typ             # full live deck (phase reveals)
+typst compile agentic-coding-seminar-cecam-handout.typ     # one page per logical slide
 ```
 
-All six shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and invoke it with the appropriate `version` and `handout` arguments.
+All eight shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and invoke it with the appropriate `version` and `handout` arguments.
 
 ## Repository contents
 
 ```
 .
-├── agentic-coding-seminar-shared.typ                # single source of truth (all three decks)
+├── agentic-coding-seminar-shared.typ                # single source of truth (all four decks)
 ├── agentic-coding-seminar-research.typ              # shim → #deck("research")
 ├── agentic-coding-seminar-research-handout.typ      # shim → #deck("research", handout: true)
 ├── agentic-coding-seminar-research-handout.pdf      # prebuilt research handout
@@ -62,9 +67,13 @@ All six shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and invo
 ├── agentic-coding-seminar-mpip.typ                  # shim → #deck("mpip")
 ├── agentic-coding-seminar-mpip-handout.typ          # shim → #deck("mpip", handout: true)
 ├── agentic-coding-seminar-mpip-handout.pdf          # prebuilt MPIP handout
+├── agentic-coding-seminar-cecam.typ                 # shim → #deck("cecam")
+├── agentic-coding-seminar-cecam-handout.typ         # shim → #deck("cecam", handout: true)
+├── agentic-coding-seminar-cecam-handout.pdf         # prebuilt CECAM handout
 ├── figures/
 │   ├── heatmap.png                                  # GitHub contribution heatmap
 │   ├── transition.png                               # weekly commit transition chart
+│   ├── heatmap-2026-10.png, transition-2026-10.png  # Oct 2026 re-run (CECAM deck)
 │   ├── mograder_commits.png                         # by-repo commit / kLOC bar chart
 │   └── repo_qr.png                                  # QR code for the closing slide
 ├── github_claude_stats.py                           # regenerates the chart figures

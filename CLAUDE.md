@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Slides and handouts for three delivered seminars, "Effective Agentic Coding for
+Slides and handouts for four seminars, "Effective Agentic Coding for
 Scientific Computing," by James Kermode (University of Warwick). It is a Typst
 document project plus one Python figure-generation script — not an application.
 
@@ -19,9 +19,11 @@ typst compile agentic-coding-seminar-brookes.typ           # Brookes live deck
 typst compile agentic-coding-seminar-brookes-handout.typ   # Brookes handout
 typst compile agentic-coding-seminar-mpip.typ              # MPIP live deck
 typst compile agentic-coding-seminar-mpip-handout.typ      # MPIP handout
+typst compile agentic-coding-seminar-cecam.typ             # CECAM live deck
+typst compile agentic-coding-seminar-cecam-handout.typ     # CECAM handout
 ```
 
-The three handout PDFs are committed to the repo; the live-deck PDFs are
+The handout PDFs are committed to the repo; the live-deck PDFs are
 `.gitignore`d and regenerated locally. After a content change, recompile and
 commit the affected handout PDF(s).
 
@@ -38,14 +40,14 @@ uv run github_claude_stats.py   # needs `gh auth login -s repo,read:org`
 
 ## Architecture
 
-All six `.typ` shims are one-liners that `#import` `deck` from
+All eight `.typ` shims are one-liners that `#import` `deck` from
 `agentic-coding-seminar-shared.typ` and call `#deck(version, handout: ...)`.
 **`agentic-coding-seminar-shared.typ` is the single source of truth** — make
 content and layout edits there, not in the shims.
 
 `#deck(version, handout)` (defined at the top of the shared file) takes:
 
-- `version` — `"research"`, `"brookes"`, or `"mpip"`. The decks share most
+- `version` — `"research"`, `"brookes"`, `"mpip"`, or `"cecam"`. The decks share most
   content; audiences diverge at roughly a dozen `#if version == "brookes"`
   blocks (title, the Brookes-only thesis slide, the case-study ordering,
   anti-pattern examples, outlook, guides, responsible-use, closing question).
@@ -61,6 +63,11 @@ content and layout edits there, not in the shims.
   outside any top-level conditional can still differ between versions. When
   editing a slide, check which conditional (if any) it sits in, and recompile
   every version it affects.
+- `cecam` is different: a separate 10-minute talk that shares no slides. It
+  branches right after the helpers (`#if version == "cecam" [...] else [...]`)
+  and the other three decks' slides all sit, unindented, in that `else`.
+  Edits inside the cecam branch cannot affect the other decks; edits outside it
+  cannot affect cecam. Design and plan: `docs/superpowers/`.
 - `handout` — when `true`, every `phased-slide` collapses to its final phase,
   turning the build-up deck into a one-page-per-slide shareable PDF.
 
@@ -84,7 +91,8 @@ slides consistent with the existing ones.
 
 `github_claude_stats.py` analyses Claude co-authored commits across the GitHub
 orgs listed in its `OWNERS` config. It writes only `figures/heatmap.png` and
-`figures/transition.png`, plus three JSON sidecars at the **repo root**
+`figures/transition.png` (or dated copies with `--fig-suffix=-YYYY-MM`, which
+keeps the figures used by already-delivered decks unchanged), plus three JSON sidecars at the **repo root**
 (`claude_commit_stats.json`, `all_commits_timeseries.json`,
 `contribution_calendar.json`). Those JSON files are neither committed nor
 gitignored. `figures/mograder_commits.png` and `figures/repo_qr.png` are not
