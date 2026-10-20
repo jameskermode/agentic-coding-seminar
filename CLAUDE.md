@@ -25,6 +25,11 @@ The three handout PDFs are committed to the repo; the live-deck PDFs are
 `.gitignore`d and regenerated locally. After a content change, recompile and
 commit the affected handout PDF(s).
 
+There is no test suite or linter. To verify a change, compile every affected
+version and check the rendered pages for overflow (text spilling onto an extra
+page or running off the 16:9 slide); compilation can succeed even when a slide
+overflows.
+
 Regenerate the chart figures in `figures/`:
 
 ```sh
@@ -48,8 +53,14 @@ content and layout edits there, not in the shims.
   version inherits the research deck by falling through. `mpip` is exactly
   this: it reuses the research deck, overriding only the title, responsible-use
   and discussion slides via `else if version == "mpip"`, and is trimmed for
-  time — four research slides are gated `#if version != "mpip"` so MPIP skips
-  them. When editing a slide, check which conditional (if any) it sits in.
+  time — four research slides (heatmap, Commit Analysis, Atomistica, the
+  mograder case study) are gated `#if version != "mpip"` so MPIP skips them.
+  Conversely, one slide ("Here's one I made earlier...") is gated
+  `#if version != "brookes"`. Some overrides are inline inside a shared slide
+  (e.g. a single `#if version == "mpip"` bullet in responsible-use), so a slide
+  outside any top-level conditional can still differ between versions. When
+  editing a slide, check which conditional (if any) it sits in, and recompile
+  every version it affects.
 - `handout` — when `true`, every `phased-slide` collapses to its final phase,
   turning the build-up deck into a one-page-per-slide shareable PDF.
 
@@ -72,9 +83,14 @@ slides consistent with the existing ones.
 ### Figures
 
 `github_claude_stats.py` analyses Claude co-authored commits across the GitHub
-orgs listed in its `OWNERS` config and writes the PNGs in `figures/` plus JSON
-sidecars. The shared deck consumes those PNGs via `image("figures/...")`. The
-script authenticates through the `gh` CLI.
+orgs listed in its `OWNERS` config. It writes only `figures/heatmap.png` and
+`figures/transition.png`, plus three JSON sidecars at the **repo root**
+(`claude_commit_stats.json`, `all_commits_timeseries.json`,
+`contribution_calendar.json`). Those JSON files are neither committed nor
+gitignored. `figures/mograder_commits.png` and `figures/repo_qr.png` are not
+produced by the script; the QR code came from the `qrcode` library's `qr` CLI.
+The shared deck consumes the PNGs via `image("figures/...")`. The script
+authenticates through the `gh` CLI.
 
 ## Conventions
 
