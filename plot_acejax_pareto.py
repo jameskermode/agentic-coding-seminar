@@ -29,8 +29,8 @@ INK, MUTED, GRID = "#1f2328", "#57606a", "#e6e6e6"
 STYLE = {  # family: (legend label, colour, marker, linestyle, filled)
     "ace":     ("linear ACE (ace-jax)",      "#2a78d6", "o", "-",  True),
     "pace":    ("PACE (pacemaker)",          "#eda100", "^", "-",  True),
-    "mace_L0": ("MACE, L=0",                 "#4a3aa7", "D", "--", False),
-    "mace_L1": ("MACE, L=1",                 "#4a3aa7", "D", "-",  True),
+    "mace_L0": ("MACE L=0 (Symmetrix)",      "#4a3aa7", "D", "--", False),
+    "mace_L1": ("MACE L=1 (Symmetrix)",      "#4a3aa7", "D", "-",  True),
 }
 
 
