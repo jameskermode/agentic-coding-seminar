@@ -434,7 +434,7 @@
       ]
     ],
     text(size: 10pt, fill: rgb("#444444"))[
-      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC. Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the HetSys policy, and to the HetSys staff and students who co-created it.
+      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the HetSys policy, and to the HetSys staff and students who co-created it.
     ],
     image("figures/ukri-epsrc-logo.png", width: 4.2cm),
   )

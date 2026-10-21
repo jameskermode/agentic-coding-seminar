@@ -93,7 +93,7 @@ The CECAM figures come from an October 2026 re-run that leaves the older figures
 
 ## Acknowledgements
 
-Claude usage for this work was supported by credits from Anthropic's AI for Science program. The HetSys Centre for Doctoral Training is funded by EPSRC. Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the [HetSys AI policy](https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/), and to the HetSys staff and students who co-created it.
+Claude usage for this work was supported by credits from Anthropic's AI for Science program. The HetSys Centre for Doctoral Training is funded by EPSRC (grants EP/S022848/1 and EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the [HetSys AI policy](https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/), and to the HetSys staff and students who co-created it.
 
 ## License
 
