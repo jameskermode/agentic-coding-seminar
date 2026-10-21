@@ -93,7 +93,16 @@ The CECAM figures come from an October 2026 re-run that leaves the older figures
 
 ## Acknowledgements
 
-Claude usage for this work was supported by credits from Anthropic's AI for Science program. The HetSys Centre for Doctoral Training is funded by EPSRC (grants EP/S022848/1 and EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the [HetSys AI policy](https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/), and to the HetSys staff and students who co-created it.
+Claude usage for this work was supported by credits from Anthropic's AI for Science program. The HetSys Centre for Doctoral Training is funded by EPSRC (grants EP/S022848/1 and EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the [HetSys AI policy](https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/), and to the HetSys staff and students who co-created it. Thanks also to the [Terminal-Bench-Science](https://www.terminal-bench-science.ai/) team and the reviewers of the `si-fracture-fbc` task.
+
+Calculations were performed using the Sulis Tier 2 HPC platform hosted by the Scientific Computing Research Technology Platform at the University of Warwick. Sulis is funded by EPSRC Grant EP/T022108/1 and the HPC Midlands+ consortium.
+
+## References
+
+- Terminal-Bench-Science: cite via its [Zenodo concept DOI](https://doi.org/10.5281/zenodo.22110253).
+- GAP-18 silicon dataset: A. P. Bartók, J. Kermode, N. Bernstein and G. Csányi, "Machine learning a general-purpose interatomic potential for silicon", *Phys. Rev. X* **8**, 041048 (2018). [doi:10.1103/PhysRevX.8.041048](https://doi.org/10.1103/PhysRevX.8.041048)
+- ACEpotentials.jl: W. C. Witt *et al.* (C. Ortner), "ACEpotentials.jl: A Julia implementation of the atomic cluster expansion", *J. Chem. Phys.* **159**, 164101 (2023). [doi:10.1063/5.0158783](https://doi.org/10.1063/5.0158783)
+- lammps-jax: A. Gangan, W. C. Witt and M. Kotak, *lammps-jax* (software, v0.2.0, 2026). [doi:10.5281/zenodo.20838694](https://doi.org/10.5281/zenodo.20838694)
 
 ## License
 

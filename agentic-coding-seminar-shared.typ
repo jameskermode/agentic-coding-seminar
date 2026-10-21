@@ -211,6 +211,7 @@
 
 // ── CECAM 3: ace-jax ─────────────────────────────────────────
 #phased-slide(title: "ace-jax: the agent wrote the code, every test was green", phases: 2, k => {
+  set block(spacing: 0.6em)
   phase(k, 1)[
     #grid(
       columns: (0.9fr, 1.1fr), gutter: 0.8em,
@@ -243,6 +244,8 @@
     ]
   ]
   v(1fr)
+  text(size: 9pt, fill: gray)[Data: GAP-18 (Bartók, Kermode, Bernstein & Csányi, Phys. Rev. X 8, 041048, 2018). Parity reference: ACEpotentials.jl (Witt … Ortner, J. Chem. Phys. 159, 164101, 2023). LAMMPS: lammps-jax (Gangan, Witt & Kotak, 2026).]
+  v(0.2em)
   cecam-links(
     ("github.com/ACEsuit/ace-jax", "https://github.com/ACEsuit/ace-jax"),
     ("acesuit.github.io/ace-jax", "https://acesuit.github.io/ace-jax/"),
@@ -434,7 +437,7 @@
       ]
     ],
     text(size: 10pt, fill: rgb("#444444"))[
-      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the HetSys policy, and to the HetSys staff and students who co-created it.
+      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the HetSys policy, and to the HetSys staff and students who co-created it. Thanks to the Terminal-Bench-Science team and reviewers. Benchmarks ran on Sulis (EPSRC EP/T022108/1, HPC Midlands+).
     ],
     image("figures/ukri-epsrc-logo.png", width: 4.2cm),
   )
