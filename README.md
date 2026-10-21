@@ -76,6 +76,7 @@ All eight shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and in
 │   ├── heatmap-2026-10.png, transition-2026-10.png  # Oct 2026 stats re-run
 │   ├── heatmap-2y-2026-10.png                       # 2-year heatmap (--heatmap-years 2), CECAM close
 │   ├── si-crack-sw-upper-fold.png, hetsys-*.png     # CECAM deck illustrations
+│   ├── ukri-epsrc-logo.png                          # EPSRC logo (ukri.org), CECAM close
 │   ├── acejax-si-pareto-a100.{json,png}             # ace-jax Si accuracy vs A100 cost (plot_acejax_pareto.py)
 │   ├── mograder_commits.png                         # by-repo commit / kLOC bar chart
 │   └── repo_qr.png                                  # QR code for the closing slide
@@ -89,6 +90,10 @@ All eight shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and in
 The chart figures in `figures/` are produced by `github_claude_stats.py`; if you want to regenerate or adapt them, the script needs `gh auth login -s repo,read:org` and is driven by `uv run`. The QR code points back to this repo and was generated with `qr` (the Python `qrcode` library's CLI).
 
 The CECAM figures come from an October 2026 re-run that leaves the older figures untouched: `uv run github_claude_stats.py --fig-suffix=-2026-10 --heatmap-years 2` (the `=` is needed because the value starts with `-`). That command writes the 2-year heatmap as `heatmap-2026-10.png`; the deck uses a copy saved as `heatmap-2y-2026-10.png`, so the 1-year version is kept. The ace-jax panel is redrawn from `figures/acejax-si-pareto-a100.json` with `uv run --with matplotlib plot_acejax_pareto.py`; the JSON records how its points were extracted from the [ace-jax benchmarks](https://acesuit.github.io/ace-jax/benchmarks/#accuracy-and-cost-silicon). The crack image is a frame of the `si-fracture-fbc` reference-solution movie. The "3D follow-up" row on the benchmark slide summarises an unpublished private-set task, so it gives no name or detailed numbers.
+
+## Acknowledgements
+
+Claude usage for this work was supported by credits from Anthropic's AI for Science program. The HetSys Centre for Doctoral Training is funded by EPSRC. Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the [HetSys AI policy](https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/), and to the HetSys staff and students who co-created it.
 
 ## License
 

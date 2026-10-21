@@ -424,15 +424,19 @@
   ]
   #v(1fr)
   #grid(
-    columns: (auto, 1fr), gutter: 1.4em, align: horizon,
+    columns: (auto, auto, 1fr, auto), gutter: 1em, align: horizon,
     image("figures/repo_qr.png", width: 2.2cm),
     [
-      #text(size: 16pt, weight: "bold")[Full talk, slides + source]
-      #v(0.2em)
-      #text(size: 14pt, fill: accent)[
+      #text(size: 14pt, weight: "bold")[Full talk, slides + source]
+      #v(0.1em)
+      #text(size: 11pt, fill: accent)[
         #link("https://github.com/jameskermode/agentic-coding-seminar")[github.com/jameskermode/agentic-coding-seminar]
       ]
     ],
+    text(size: 10pt, fill: rgb("#444444"))[
+      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC. Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the HetSys policy, and to the HetSys staff and students who co-created it.
+    ],
+    image("figures/ukri-epsrc-logo.png", width: 4.2cm),
   )
 ]
 
