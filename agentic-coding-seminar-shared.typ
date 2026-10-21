@@ -244,7 +244,7 @@
     ]
   ]
   v(1fr)
-  text(size: 9pt, fill: gray)[Data: GAP-18 (Bartók, Kermode, Bernstein & Csányi, Phys. Rev. X 8, 041048, 2018). Parity reference: ACEpotentials.jl (Witt … Ortner, J. Chem. Phys. 159, 164101, 2023). LAMMPS: lammps-jax (Gangan, Witt & Kotak, 2026).]
+  text(size: 9pt, fill: gray)[Data: GAP-18 (Bartók et al., Phys. Rev. X 8, 041048, 2018). Parity reference: ACEpotentials.jl (Witt … Ortner, J. Chem. Phys. 159, 164101, 2023). LAMMPS: lammps-jax (Gangan, Witt & Kotak, 2026). Compared: pacemaker (Bochkarev et al., Phys. Rev. Mater. 6, 013804, 2022); MACE (Batatia et al., NeurIPS 2022).]
   v(0.2em)
   cecam-links(
     ("github.com/ACEsuit/ace-jax", "https://github.com/ACEsuit/ace-jax"),

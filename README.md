@@ -102,6 +102,8 @@ Calculations were performed using the Sulis Tier 2 HPC platform hosted by the Sc
 - Terminal-Bench-Science: cite via its [Zenodo concept DOI](https://doi.org/10.5281/zenodo.22110253).
 - GAP-18 silicon dataset: A. P. Bartók, J. Kermode, N. Bernstein and G. Csányi, "Machine learning a general-purpose interatomic potential for silicon", *Phys. Rev. X* **8**, 041048 (2018). [doi:10.1103/PhysRevX.8.041048](https://doi.org/10.1103/PhysRevX.8.041048)
 - ACEpotentials.jl: W. C. Witt *et al.* (C. Ortner), "ACEpotentials.jl: A Julia implementation of the atomic cluster expansion", *J. Chem. Phys.* **159**, 164101 (2023). [doi:10.1063/5.0158783](https://doi.org/10.1063/5.0158783)
+- pacemaker (PACE): A. Bochkarev, Y. Lysogorskiy, S. Menon, M. Qamar, M. Mrovec and R. Drautz, "Efficient parametrization of the atomic cluster expansion", *Phys. Rev. Materials* **6**, 013804 (2022). [doi:10.1103/PhysRevMaterials.6.013804](https://doi.org/10.1103/PhysRevMaterials.6.013804)
+- MACE: I. Batatia, D. P. Kovács, G. N. C. Simm, C. Ortner and G. Csányi, "MACE: Higher order equivariant message passing neural networks for fast and accurate force fields", *Advances in Neural Information Processing Systems* **35** (NeurIPS 2022). [arXiv:2206.07697](https://arxiv.org/abs/2206.07697)
 - lammps-jax: A. Gangan, W. C. Witt and M. Kotak, *lammps-jax* (software, v0.2.0, 2026). [doi:10.5281/zenodo.20838694](https://doi.org/10.5281/zenodo.20838694)
 
 ## License
