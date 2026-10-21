@@ -9,7 +9,7 @@ Slides from four seminars by [James Kermode](https://warwick.ac.uk/jrkermode), U
 | **MPIP version** | Max Planck Institute for Polymer Research | 15 June 2026 | [📄 PDF](agentic-coding-seminar-mpip-handout.pdf) |
 | **CECAM version** | CECAM Mary Ann Mansigh Lecture *Who writes the code?*, EPFL (online) | 27 October 2026 | [📄 PDF](agentic-coding-seminar-cecam-handout.pdf) |
 
-The three decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study. The MPIP version is a trimmed (~45 min) cut of the research version for a computational-science audience: it drops the `mograder` case study and a few detail slides. The CECAM version is a separate 10-minute talk on training the next generation: ace-jax and a Terminal-Bench-Science task as evidence that the human work has moved to asking the questions and deciding what counts as correct, then the HetSys AI policy and `mograder` as a response. Its patterns slide lists headlines only and links back here for the full versions.
+The research, Brookes and MPIP decks share most of their content. The Brookes version leads with the assessment-design thesis and `mograder` as the worked case study; the research version leads with research-codebase examples (ACEpotentials, LAMMPS, GPU port, Atomistica) and frames `mograder` as a supporting case study. The MPIP version is a trimmed (~45 min) cut of the research version for a computational-science audience: it drops the `mograder` case study and a few detail slides. The CECAM version is a separate 10-minute talk on training the next generation: ace-jax and a Terminal-Bench-Science task as evidence that the human work has moved to asking the questions and deciding what counts as correct, then the HetSys AI policy and `mograder` as a response. Its patterns slide lists headlines only and links back here for the full versions.
 
 Discussion: [LinkedIn post](https://www.linkedin.com/posts/james-kermode-b97147284_effective-agentic-coding-for-scientific-computing-activity-7457797781534011392-N-d9).
 
@@ -17,7 +17,7 @@ Discussion: [LinkedIn post](https://www.linkedin.com/posts/james-kermode-b971472
 
 Agentic coding tools such as Claude Code, Cursor, and Codex have crossed from novelty into the daily workflows of research groups willing to engage them seriously. Used well, they can migrate legacy Fortran build systems, write numerically validated simulation code, and maintain CI across multi-language stacks; used badly, they hallucinate plausible nonsense at scale.
 
-These talks distil 6 months of hands-on experience, 1,000+ Claude co-authored commits across 26 repositories, and `mograder` as a case study into practical patterns and anti-patterns. The patterns are tool-agnostic; the case studies use Claude Code.
+These talks distil 6 months of hands-on experience, 1,000+ Claude co-authored commits across 26 repositories, and `mograder` as a case study into practical patterns and anti-patterns. The patterns are tool-agnostic; the case studies use Claude Code. (By the CECAM talk in October 2026 the count had reached 2,332 commits across 52 repositories.)
 
 ## Disclaimer
 
@@ -81,11 +81,14 @@ All eight shims `#import` `deck` from `agentic-coding-seminar-shared.typ` and in
 │   └── repo_qr.png                                  # QR code for the closing slide
 ├── github_claude_stats.py                           # regenerates the chart figures
 ├── plot_acejax_pareto.py                            # ace-jax Pareto cut for the CECAM deck
+├── docs/superpowers/                                # CECAM design spec and implementation plan
 ├── LICENSE                                          # CC-BY-4.0
 └── README.md
 ```
 
 The chart figures in `figures/` are produced by `github_claude_stats.py`; if you want to regenerate or adapt them, the script needs `gh auth login -s repo,read:org` and is driven by `uv run`. The QR code points back to this repo and was generated with `qr` (the Python `qrcode` library's CLI).
+
+The CECAM figures come from an October 2026 re-run that leaves the older figures untouched: `uv run github_claude_stats.py --fig-suffix=-2026-10 --heatmap-years 2` (the `=` is needed because the value starts with `-`). That command writes the 2-year heatmap as `heatmap-2026-10.png`; the deck uses a copy saved as `heatmap-2y-2026-10.png`, so the 1-year version is kept. The ace-jax panel is redrawn from `figures/acejax-si-pareto-a100.json` with `uv run --with matplotlib plot_acejax_pareto.py`; the JSON records how its points were extracted from the [ace-jax benchmarks](https://acesuit.github.io/ace-jax/benchmarks/#accuracy-and-cost-silicon). The crack image is a frame of the `si-fracture-fbc` reference-solution movie. The "3D follow-up" row on the benchmark slide summarises an unpublished private-set task, so it gives no name or detailed numbers.
 
 ## License
 
