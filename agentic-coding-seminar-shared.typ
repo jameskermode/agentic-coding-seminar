@@ -194,18 +194,16 @@
 #slide(title: "The end of human programming?")[
   #v(0.3em)
   #note[
-    "The end of human programming?" \
-    "At the VASP Software GmbH, about 70% of our team now uses multi-agent LLM pools to develop software."
-    #align(right)[#text(size: 14pt, style: "normal")[— G. Kresse, CECAM abstract, 27 Oct 2026]]
+    "… code generation now happening so quickly that human review is impossible. This forces us to rely on AI itself for validation and regression testing."
+    #align(right)[#text(size: 14pt, style: "normal")[— G. Kresse, this afternoon]]
   ]
   #v(0.4em)
-  #text(size: 17pt)[Code now arrives faster than humans can review it, so validation and regression testing are handed to AI too.]
+  #text(size: 17pt)[Marques, Riccardi and Genovese: validation is what separates plausible physics from correct physics, and it remains the scientist's job.]
   #v(0.6em)
   #warn-block[
-    If validation relies on AI, the human skill that is left is knowing what to validate against
-    and which question to ask.
+    Either way, someone has to know what to validate against and which question to ask.
     #v(0.3em)
-    Where does the next generation learn that?
+    Who will be able to do that in ten years' time?
   ]
 ]
 
@@ -310,6 +308,8 @@
       *Deciding what counts as correct*
       #v(0.2em)
       #text(size: 18pt)[ace-jax: consistency checks are not correctness checks. Green CI ≠ right answer.]
+      #v(0.2em)
+      #text(size: 13pt, fill: rgb("#444444"))[Riccardi: "a frozen output counts as a regression check, never as evidence that a value is correct."]
     ],
   )
   #v(0.8em)
