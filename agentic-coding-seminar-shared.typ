@@ -339,13 +339,12 @@
       #text(size: 15pt)[
         #bullet[Skill erosion is the central concern]
         #bullet[Principles (adapted from DTU Physics and Vancouver Guidelines): all content is your responsibility, AI is not an author, and substantive use must be declared]
-        #bullet[Build foundations by hand in PhD years 1–2: \
-          "the friction is educational"]
-        #bullet[Keep one regular problem you solve without AI]
-        #bullet[Tests use numerical tolerances you choose, not the AI]
+        #bullet[Build foundations by hand in PhD years 1–2]
+        #bullet[Examples of checking for different modes of AI use\
+          e.g. tests should use physical laws and numerical tolerances you choose]
         #bullet[Avoid "verification theatre": code looks verifiable but isn't]
         #bullet[Declare substantive use: supervisors too, to normalise]
-        #bullet[Everyday test: would the same help from a colleague be acceptable?]
+        #bullet[Everyday test: would same help from a colleague be acceptable?]
       ]
     ],
     [
@@ -388,7 +387,7 @@
     ],
   )
   #v(0.3em)
-  #note[#text(size: 15pt)[Delegate pattern-matching 'did the code produce the right answer?' to the machine, \
+  #note[#text(size: 15pt)[Built `mograder` tool to help delegate pattern-matching 'did the code produce the right answer?' to the machine, \
     keeping the human question 'did the student understand?' for humans.]]
   #v(1fr)
   #cecam-links(
@@ -449,7 +448,7 @@
       ]
     ],
     text(size: 10pt, fill: rgb("#444444"))[
-      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing the AI guidelines that were the starting point for the HetSys policy, and to the HetSys staff and students who co-created it. Thanks to the Terminal-Bench-Science team and reviewers. Benchmarks ran on Sulis (EPSRC EP/T022108/1, HPC Midlands+).
+      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing AI guidelines that were starting point for HetSys policy, and to the HetSys staff and students who co-created it. Thanks to TBS team and reviewers. Benchmarks ran on Sulis (EPSRC EP/T022108/1, HPC Midlands+). Claude Code used for slide design; all opinions my own and evidence checked.
     ],
     image("figures/ukri-epsrc-logo.png", width: 4.2cm),
   )
