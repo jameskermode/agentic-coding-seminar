@@ -448,7 +448,7 @@
       ]
     ],
     text(size: 10pt, fill: rgb("#444444"))[
-      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing AI guidelines that were starting point for HetSys policy, and to the HetSys staff and students who co-created it. Thanks to TBS team and reviewers. Benchmarks ran on Sulis (EPSRC EP/T022108/1, HPC Midlands+). Claude Code used for slide design; all opinions my own and evidence checked.
+      *Acknowledgements:* Claude usage supported by credits from Anthropic's AI for Science program. HetSys is funded by EPSRC (EP/S022848/1, EP/Y035429/1). Thanks to Karsten Jacobsen (DTU Physics) for sharing AI guidelines that were starting point for HetSys policy, and to the HetSys staff and students who co-created it. Thanks to TBS team and reviewers. Benchmarks ran on Sulis (EPSRC EP/T022108/1, HPC Midlands+). Claude Code used for slide design; all opinions my own and all evidence verified.
     ],
     image("figures/ukri-epsrc-logo.png", width: 4.2cm),
   )
