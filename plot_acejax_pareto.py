@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Slide-sized cut of ace-jax's silicon accuracy-cost figure (panel B: A100 cost
-vs QoI error) for the CECAM deck: four ladders, larger text.
+vs QoI error) for the CECAM deck: four ladders, larger text. Linear ACE is
+timed with ace-jax's CUDA kernel (ace-jax PR 126), not the XLA program.
 
 Reads figures/acejax-si-pareto-a100.json (the points extracted from ace-jax's
 bench/si_qoi/plot_cost.py; see its "source" field) and writes
@@ -27,7 +28,7 @@ OUT = HERE / "figures" / "acejax-si-pareto-a100.png"
 INK, MUTED, GRID = "#1f2328", "#57606a", "#e6e6e6"
 # ace-jax's own family styles (plot_cost.py FAM), so the cut matches the docs figure
 STYLE = {  # family: (legend label, colour, marker, linestyle, filled)
-    "ace":     ("linear ACE (ace-jax)",      "#2a78d6", "o", "-",  True),
+    "ace_ffi": ("linear ACE (ace-jax)",      "#2a78d6", "o", "-",  True),   # CUDA kernel timings
     "pace":    ("PACE (pacemaker)",          "#eda100", "^", "-",  True),
     "mace_L0": ("MACE L=0 (Symmetrix)",      "#4a3aa7", "D", "--", False),
     "mace_L1": ("MACE L=1 (Symmetrix)",      "#4a3aa7", "D", "-",  True),
@@ -51,7 +52,7 @@ def main() -> None:
 
     ax.set_xscale("log")
     ax.set_yscale("log")
-    for axis, ticks in ((ax.xaxis, [0.2, 0.5, 1, 2, 5]), (ax.yaxis, [0.3, 0.5, 1, 2, 3])):
+    for axis, ticks in ((ax.xaxis, [0.05, 0.1, 0.2, 0.5, 1, 2, 5]), (ax.yaxis, [0.3, 0.5, 1, 2, 3])):
         axis.set_major_locator(mticker.FixedLocator(ticks))
         axis.set_major_formatter(mticker.FormatStrFormatter("%g"))
         axis.set_minor_formatter(mticker.NullFormatter())

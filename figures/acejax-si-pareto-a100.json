@@ -1,5 +1,5 @@
 {
- "source": "ace-jax origin/main 78fa15e: bench/si_qoi/plot_cost.py collect() with results/cost_sulis_gpu.json (A100) and QoI property files from ~/silicon-testing-framework; panel B of docs/user/assets/benchmarks/si_accuracy_cost.png",
+ "source": "ace-jax origin/main 78fa15e: bench/si_qoi/plot_cost.py collect() with results/cost_sulis_gpu.json (A100) and QoI property files from ~/silicon-testing-framework; panel B of docs/user/assets/benchmarks/si_accuracy_cost.png. ace_ffi: the same linear ACE fits (QoI as ace) timed with ace-jax's CUDA kernel in the lammps-jax bundle, ACEffi_<size> from bench/si_qoi/results/cost_sulis_gpu.json on ace-jax PR 126 (feat/cuda-kernel, 45c8442), Sulis A100, float64",
  "x": "A100 GPU cost, microseconds per atom per MD step (LAMMPS, float64)",
  "y": "QoI error: geometric mean over 21 silicon QoIs of |error|/tolerance vs DFT",
  "target_qoi": 0.5,
@@ -161,6 +161,46 @@
      "size": "c32L1",
      "cost_us": 6.148139953613281,
      "qoi": 0.315
+    }
+   ]
+  },
+  "ace_ffi": {
+   "label": "linear ACE, ace-jax CUDA kernel (FFI)",
+   "points": [
+    {
+     "size": "o3d8",
+     "cost_us": 0.041774291992187504,
+     "qoi": 2.943
+    },
+    {
+     "size": "o3d10",
+     "cost_us": 0.04511489868164062,
+     "qoi": 1.896
+    },
+    {
+     "size": "o3d12",
+     "cost_us": 0.0639373779296875,
+     "qoi": 1.029
+    },
+    {
+     "size": "o4d12",
+     "cost_us": 0.08031097412109375,
+     "qoi": 0.756
+    },
+    {
+     "size": "o4d14",
+     "cost_us": 0.1423638916015625,
+     "qoi": 0.861
+    },
+    {
+     "size": "o4d16",
+     "cost_us": 0.28612213134765624,
+     "qoi": 0.641
+    },
+    {
+     "size": "o4d20",
+     "cost_us": 1.2328353881835938,
+     "qoi": 0.385
     }
    ]
   }
