@@ -180,14 +180,11 @@
 #let cecam-links(..pairs) = text(size: 12pt, fill: accent,
   pairs.pos().map(((label, url)) => link(url, label)).join([ #h(0.3em)·#h(0.3em) ]))
 
-#let cecam-disclaimer = [Personal views as a Warwick academic and #link("https://warwick.ac.uk/fac/sci/hetsys/")[#underline[HetSys CDT]] director. The HetSys AI policy shown is the CDT's adopted policy; the rest is not the institutional view of the University of Warwick.]
-
 #titleslide(
   "Effective Agentic Coding\nfor Scientific Computing",
-  "The code is the easy part: asking the questions, checking the answers, and training who does both",
+  "Coding is the easy part now: asking AI the right questions, checking its answers, and training researchers to do this is what's hard",
   "James Kermode · School of Engineering, University of Warwick",
   "27 October 2026 · CECAM Mary Ann Mansigh Lecture (online)",
-  disclaimer: cecam-disclaimer,
 )
 
 // ── CECAM 2: push back on "validation relies on AI" ──────────
@@ -195,54 +192,54 @@
   #v(0.3em)
   #note[
     "… code generation now happening so quickly that human review is impossible. This forces us to rely on AI itself for validation and regression testing."
-    #align(right)[#text(size: 14pt, style: "normal")[— G. Kresse, this afternoon]]
+    #align(right)[#text(size: 14pt, style: "normal")[— G. Kresse, abstract for this afternoon]]
   ]
   #v(0.4em)
-  #text(size: 17pt)[Marques, Riccardi and Genovese: validation is what separates plausible physics from correct physics, and it remains the scientist's job.]
+  Other talks have emphasised that validation is what separates plausible physics from correct physics, and that it remains the scientist's job.
   #v(0.6em)
   #warn-block[
-    Either way, someone has to know what to validate against and which question to ask.
+    Whether tests are implemented by humans or AI, someone has to know what to validate against and which question to ask.
     #v(0.3em)
     Who will be able to do that in ten years' time?
   ]
 ]
 
 // ── CECAM 3: ace-jax ─────────────────────────────────────────
-#phased-slide(title: "ace-jax: the agent wrote the code, every test was green", phases: 2, k => {
+#phased-slide(title: "My experience of agentic coding: ace-jax", phases: 3, k => {
+
   set block(spacing: 0.6em)
   phase(k, 1)[
+    #v(-1em)
+    #align(center, image("figures/heatmap-2y-2026-10.png", width: 100%))
+    #v(-0.4em)
+    #align(right, text(size: 12pt, fill: gray)[2,332 Claude co-authored commits, across 52 repositories (Oct 2025 – Oct 2026).])
+  ]
+  phase(k, 2)[
     #grid(
       columns: (0.9fr, 1.1fr), gutter: 0.8em,
       text(size: 13pt)[
-        #bullet[JAX port of ACE interatomic potentials, CPU and GPU]
-        #bullet[107 of 109 commits agent co-authored; ≈20k lines of source, ≈28k of tests]
-        #bullet[Parity in CI against ACEpotentials.jl and ML-PACE / python-ace, at 10#super[−12]–10#super[−14]]
-        #bullet[Human work: choosing the references, the tolerances, the benchmarks, and certifying the result]
+        #bullet[JAX port of ACE interatomic potentials, CPU and GPU. Available via `pip install ace-jax`]
+        #bullet[Agent co-authored ≈20k lines of source, ≈28k of tests]
+        #bullet[Parity ensured in CI against ACEpotentials.jl and ML-PACE / python-ace, at 10#super[−12]–10#super[−14]]
+        #bullet[*Human work:* high-level design (e.g. choice of frameworks and algorithms), choosing reference systems, tolerances, benchmarks, certifying result]
       ],
-      image("figures/acejax-si-pareto-a100.png", width: 100%),
+      image("figures/acejax-si-pareto-a100.png", width: 80%),
     )
   ]
-  v(0.2em)
-  phase(k, 1)[
-    #block(fill: light, radius: 4pt, inset: (x: 1em, y: 0.5em), width: 100%, text(size: 13pt)[
-      `pip install ace-jax` · evidence-chosen fit weights · calibrated force uncertainties · pacemaker `.yace` in/out
-    ])
-  ]
-  v(0.2em)
-  phase(k, 2)[
+  phase(k, 3)[
     #text(size: 13pt)[
       #twocol(
         bad-block[
-          *Bug \#57:* basis-builder columns misaligned. Every test was green: the Julia parity CI checked the evaluator on a model Julia had built, never ace-jax's own builder.
+          *Bug:* basis columns misaligned. Every test passed: the Julia parity CI checked the evaluator on a model Julia built, not on ace-jax's own basis builder.
         ],
         good-block[
-          *Fix \#70:* built-basis parity against Julia (agrees to 2×10#super[−14]\; without the fix, 109/110 blocks fail), and a missing reference now fails instead of skipping.
+          *Fix and post-mortem:* built-basis parity against Julia (agrees to 10#super[−14]\; without the fix, most blocks fail), and missing reference data now fails instead of skipping.
         ],
       )
     ]
   ]
   v(1fr)
-  text(size: 9pt, fill: gray)[Data: GAP-18 (Bartók et al., Phys. Rev. X 8, 041048, 2018). Parity reference: ACEpotentials.jl (Witt … Ortner, J. Chem. Phys. 159, 164101, 2023). LAMMPS: lammps-jax (Gangan, Witt & Kotak, 2026). Compared: pacemaker (Bochkarev et al., Phys. Rev. Mater. 6, 013804, 2022); MACE (Batatia et al., NeurIPS 2022) run by Symmetrix (W. C. Witt; Kovács et al., J. Am. Chem. Soc. 147, 17598, 2025).]
+  text(size: 9pt, fill: gray)[Data: GAP-18 (Bartók et al., Phys. Rev. X, 2018). Parity reference: ACEpotentials.jl (Witt et al., J. Chem. Phys. 2023). LAMMPS: lammps-jax (Gangan, Witt & Kotak, 2026). Compared: pacemaker (Bochkarev et al., Phys. Rev. Mater. 2022); MACE (Batatia et al., NeurIPS 2022) run by Symmetrix (W. C. Witt).]
   v(0.2em)
   cecam-links(
     ("github.com/ACEsuit/ace-jax", "https://github.com/ACEsuit/ace-jax"),
@@ -258,14 +255,14 @@
     [
       #phase(k, 1)[
         #text(size: 14pt)[
-          Terminal-Bench-Science `si-fracture-fbc`: Si(111) crack tip, Stillinger–Weber, flexible boundary + Cauchy–Born corrector. Implement from scratch; locate the lattice-trapping folds.
+          *Terminal-Bench-Science* (TBS): my contributed `si-fracture-fbc` task. Si(111) crack tip, Stillinger–Weber, flexible continuum linear elastic boundary + Cauchy–Born corrector. Implement from scratch and locate lattice-trapping folds; 16–24~h expert estimate
           #v(0.2em)
           #table(
             columns: (auto, 1fr, auto), stroke: 0.5pt + gray, inset: 4pt,
             table.header([*Version*], [*Change*], [*Result*]),
-            [v0.1 (Aug)], [original task], [previous generation: no valid pass],
-            [Repaired], [corrected oracle (my bug)], [GPT-6 Astra: all 9 gates, 21 min, \$6.63],
-            [Hardened], [mixed-mode crossover], [Astra: all 7 gates, 65 min],
+            [v0.1 (Aug)], [original task], [previous AI model generation: no valid pass],
+            [Repaired], [corrected a bug in reference], [GPT-6 Astra: passed, 21 min, \$6],
+            [Hardened], [mixed-mode $K_"I"$/$K_"II"$ crossover], [Astra: passed, 65 min],
             [Hardened again], [reconstructed-branch fold], [Opus 5.5 ✓, Astra ✓, ≈1 h, \$7–13],
             [3D follow-up], [crack-front kinks, free energy at 600 K (≈40~h expert task)], [Opus 5.5 ✓, ≈1.5 h, key physics unprompted],
           )
@@ -274,8 +271,9 @@
       #v(0.2em)
       #phase(k, 2)[
         #text(size: 13pt)[
-          *Labs now headline it:* Opus 5 29.0% → Opus 5.5 58.7%; GPT-5.6 Sol 22.4% → GPT-6 Astra 64.6%
-          #text(size: 10pt, fill: gray)[(Opus 5.5 System Card §8.6; OpenAI GPT-6 Astra launch)]
+          *AI Labs now headline with science benchmarks like TBS*
+
+         Opus 5 29% → Opus 5.5 59%; GPT-5.6 Sol 22% → GPT-6 Astra 65%
         ]
       ]
     ],
@@ -284,7 +282,7 @@
       #text(size: 10pt, fill: gray)[Reference solution at the upper fold (Stillinger–Weber), the last trapped state before the crack advances one lattice period. Gold: under-coordinated atoms.]
       #v(0.3em)
       #phase(k, 2)[
-        #warn-block[#text(size: 14pt)[Once a task is fully specified, the difficulty collapses. The human work is choosing the question.]]
+        #warn-block[#text(size: 14pt)[Once a task is fully specified, the difficulty collapses. The human work is choosing the scientific question and validating results.]]
       ]
     ],
   )
@@ -296,32 +294,111 @@
 })
 
 // ── CECAM 5: the turn ────────────────────────────────────────
-#slide(title: "Where did we learn to do this?")[
+#phased-slide(title: "Where did we learn to do this?", phases: 3, k => [
+
   #v(0.3em)
+  #phase(k, 1)[
   #twocol(
     block(fill: light, radius: 4pt, inset: 1em, width: 100%)[
       *Asking the question*
       #v(0.2em)
-      #text(size: 18pt)[The benchmark: specification is now the hard part; implementation is not.]
+      #text(size: 18pt)[TBS benchmark: specification is now the hard part, implementation is not.]
     ],
     block(fill: light, radius: 4pt, inset: 1em, width: 100%)[
       *Deciding what counts as correct*
       #v(0.2em)
       #text(size: 18pt)[ace-jax: consistency checks are not correctness checks. Green CI ≠ right answer.]
-      #v(0.2em)
-      #text(size: 13pt, fill: rgb("#444444"))[Riccardi: "a frozen output counts as a regression check, never as evidence that a value is correct."]
     ],
   )
+  ]
+  #phase(k, 2)[
   #v(0.8em)
   #warn-block[
     These skills came from struggle: years of debugging, deriving, and being wrong.
     #v(0.2em)
-    Without struggle-as-pedagogy, they will not be automatic.
+    Without the 'struggle-as-pedagogy' of a traditional PhD, they will not be automatic.
+    #v(0.2em)
   ]
+  ]
+  #phase(k, 3)[
+  This doesn't mean preventing new researchers from using these tools at all, but rather
+  deciding deliberately which friction is educational and which can be removed without loss.
+  ]
+])
+
+// ── CECAM 6: HetSys AI policy ────────────────────────────────
+#slide(title: "HetSys Centre for Doctoral Training AI policy")[
+  #v(-1em)
+  #text(size: 16pt)[
+  EPSRC Centre for Doctoral Training in Modelling of Heterogeneous Systems at Warwick, spanning physical sciences
+  with an emphasis on computational modelling. New AI policy for this academic year.
+  ]
+  #grid(
+    columns: (1.1fr, 1fr), gutter: 1.2em,
+    [
+      #text(size: 15pt)[
+        #bullet[Skill erosion is the central concern]
+        #bullet[Principles (adapted from DTU Physics and Vancouver Guidelines): all content is your responsibility, AI is not an author, and substantive use must be declared]
+        #bullet[Build foundations by hand in PhD years 1–2: \
+          "the friction is educational"]
+        #bullet[Keep one regular problem you solve without AI]
+        #bullet[Tests use numerical tolerances you choose, not the AI]
+        #bullet[Avoid "verification theatre": code looks verifiable but isn't]
+        #bullet[Declare substantive use: supervisors too, to normalise]
+        #bullet[Everyday test: would the same help from a colleague be acceptable?]
+      ]
+    ],
+    [
+      #align(center)[
+        #image("figures/hetsys-schematic.png", height: 5cm)
+        #v(0.3em)
+        #image("figures/hetsys-jigsaw.png", height: 5cm)
+      ]
+    ],
+  )
+  #v(1fr)
+  #cecam-links(
+    ("warwick.ac.uk/hetsys", "https://warwick.ac.uk/fac/sci/hetsys/"),
+    ("AI policy", "https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/"),
+  )
 ]
 
-// ── CECAM 6: patterns and anti-patterns, headlines only ──────
-#slide(title: "Patterns and anti-patterns")[
+// ── CECAM 7: mograder — assessing understanding ──────────────
+#slide(title: "Assessing understanding, not typing of code")[
+  #v(0.2em)
+  #text(size: 16pt)[Not all MSc/PhD code will be human-written. Assessment should separate what a machine can check from what a human must.]
+  #v(0.3em)
+  #twocol(
+    good-block[
+      *Formative: code*
+      #v(0.2em)
+      #text(size: 15pt)[
+        #bullet[Automated checks run as each cell is completed]
+        #bullet[Partial credit and targeted feedback, fast turnaround]
+        #bullet[Low stakes]
+      ]
+    ],
+    warn-block[
+      *Summative: understanding*
+      #v(0.2em)
+      #text(size: 15pt)[
+        #bullet[*Random mini-vivas*: 10–15 min discussing the submitted code with marker; sample allocated after submission]
+        #bullet[However it was written, they have to defend it]
+      ]
+    ],
+  )
+  #v(0.3em)
+  #note[#text(size: 15pt)[Delegate pattern-matching 'did the code produce the right answer?' to the machine, \
+    keeping the human question 'did the student understand?' for humans.]]
+  #v(1fr)
+  #cecam-links(
+    ("github.com/jameskermode/mograder", "https://github.com/jameskermode/mograder"),
+    ("jameskermode.github.io/mograder", "https://jameskermode.github.io/mograder/"),
+  )
+]
+
+// ── CECAM 8: patterns and anti-patterns, headlines only ──────
+#slide(title: "Patterns and Anti-patterns for Agentic Scientific Computing")[
   #v(0.2em)
   #twocol(
     good-block[
@@ -352,77 +429,12 @@
   )
 ]
 
-// ── CECAM 7: HetSys AI policy ────────────────────────────────
-#slide(title: "HetSys AI policy (v1.0, Aug 2026)")[
-  #grid(
-    columns: (1.1fr, 1fr), gutter: 1.2em,
-    [
-      #text(size: 15pt)[
-        #bullet[Skill erosion is the central concern, not only rules]
-        #bullet[Build foundations by hand in PhD years 1–2: "the friction is educational"]
-        #bullet[Keep one regular problem you solve without AI]
-        #bullet[Tests use numerical tolerances you choose, not the AI]
-        #bullet[Watch for "verification theatre": code that looks verifiable but isn't]
-        #bullet[Declare substantive use — supervisors too]
-        #bullet[Everyday test: would the same help from a colleague be acceptable?]
-      ]
-    ],
-    [
-      #align(center)[
-        #image("figures/hetsys-schematic.png", width: 100%)
-        #v(0.3em)
-        #image("figures/hetsys-jigsaw.png", height: 5.2cm)
-      ]
-    ],
-  )
-  #v(1fr)
-  #cecam-links(
-    ("warwick.ac.uk/hetsys", "https://warwick.ac.uk/fac/sci/hetsys/"),
-    ("AI policy", "https://warwick.ac.uk/fac/sci/hetsys/studentinformationhub/aipolicy/"),
-  )
-]
-
-// ── CECAM 8: mograder — assessing understanding ──────────────
-#slide(title: "Assessing understanding, not authorship")[
-  #v(0.2em)
-  #text(size: 16pt)[Not all MSc/PhD code will be human-written. mograder separates what a machine can check from what a human must.]
-  #v(0.3em)
-  #twocol(
-    good-block[
-      *Formative — the code*
-      #v(0.2em)
-      #text(size: 15pt)[
-        #bullet[Automated checks run as each cell is completed]
-        #bullet[Partial credit and targeted feedback, fast turnaround]
-        #bullet[Low stakes]
-      ]
-    ],
-    warn-block[
-      *Summative — the understanding*
-      #v(0.2em)
-      #text(size: 15pt)[
-        #bullet[*Random mini-vivas*: 10–15 min walking a marker through the submitted code; sample allocated after submission]
-        #bullet[Their name is on it: however it was written, they defend it]
-      ]
-    ],
-  )
-  #v(0.3em)
-  #note[#text(size: 15pt)[Delegate pattern-matching — did the code produce the right answer? — to the machine; keep the human question — did the student understand? — for humans.]]
-  #v(1fr)
-  #cecam-links(
-    ("github.com/jameskermode/mograder", "https://github.com/jameskermode/mograder"),
-    ("jameskermode.github.io/mograder", "https://jameskermode.github.io/mograder/"),
-  )
-]
-
 // ── CECAM close ──────────────────────────────────────────────
 #slide(title: "Discussion")[
-  #align(center, image("figures/heatmap-2y-2026-10.png", width: 100%))
-  #align(right, text(size: 12pt, fill: gray)[My commits: 2,332 Claude co-authored, across 52 repositories (Oct 2025 – Oct 2026).])
-  #v(0.4em)
   #block(fill: light, radius: 6pt, inset: 1.2em, width: 100%)[
     #text(size: 22pt, weight: "bold")[
-      Who will train the researchers of the future, if we outsource all coding to agents now?
+      Who will train the researchers of the future, \
+      if we outsource all coding to agents now?
     ]
   ]
   #v(1fr)
